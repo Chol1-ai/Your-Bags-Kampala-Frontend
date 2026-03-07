@@ -1,0 +1,94 @@
+.content-area {
+  flex: 1;
+  background: #f90505;
+  padding: 40px;
+  border-radius: 4px;
+}
+.content-area h1 {
+  color: var(--dombelo-red);
+  margin-bottom: 20px;
+}
+
+/* About Hero */
+.about-hero {
+  background:
+    linear-gradient(rgba(125, 42, 232, 0.1), rgba(125, 42, 232, 0.05)),
+    var(--cream);
+  padding: 80px 8%;
+  text-align: center;
+}
+
+.about-hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--purple);
+}
+.subtitle {
+  font-size: 18px;
+  color: var(--text);
+  margin-top: 10px;
+}
+
+/* Main Content Grid */
+.about-text-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  padding: 80px 8%;
+  align-items: center;
+}
+
+.text-box h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.text-box p {
+  margin-bottom: 15px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.image-box img {
+  width: 100%;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Values Section (Icons) */
+.values-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 60px 8%;
+  background: white;
+}
+
+.value-card {
+  text-align: center;
+  padding: 40px;
+  background: var(--cream);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+}
+
+.value-card i {
+  font-size: 40px;
+  color: var(--purple);
+  margin-bottom: 20px;
+}
+
+.value-card h3 {
+  margin-bottom: 10px;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .about-text-grid,
+  .values-section {
+    grid-template-columns: 1fr;
+  }
+}

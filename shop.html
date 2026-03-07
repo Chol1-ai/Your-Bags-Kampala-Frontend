@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Collection | Your Bags Kampala</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* SHOP CONTROL BAR */
+      .shop-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px 8%;
+        background: var(--cream);
+        align-items: center;
+      }
+
+      .search-wrapper {
+        position: relative;
+        width: 100%;
+      }
+      .search-wrapper i {
+        position: absolute;
+        left: 15px;
+        top: 14px;
+        color: #aaa;
+      }
+      .search-input {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        outline: none;
+      }
+
+      .sort-select {
+        padding: 12px 20px;
+        border-radius: 30px;
+        border: 1px solid #ddd;
+        background: white;
+        cursor: pointer;
+        outline: none;
+        font-size: 14px;
+      }
+
+      /* FILTERS */
+      .filter-bar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 8%;
+        overflow-x: auto;
+        background: var(--cream);
+        border-bottom: 1px solid #eee;
+      }
+      .f-btn {
+        padding: 8px 18px;
+        border: 1px solid var(--purple);
+        background: white;
+        border-radius: 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: 13px;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .f-btn.active {
+        background: var(--purple);
+        color: white;
+      }
+
+      /* GRID */
+      .shop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 18px;
+        padding: 28px 8%;
+        min-height: 400px;
+      }
+
+      /* PRODUCT CARD UPGRADES */
+      .bag-card {
+        border: 1px solid #eee;
+        padding: 12px;
+        border-radius: 16px;
+        text-align: center;
+        background: white;
+        transition: 0.3s;
+        position: relative;
+      }
+      .bag-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      /* New Badge */
+      .badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--purple);
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        z-index: 5;
+      }
+
+      .bag-card img {
+        width: 100%;
+        height: 165px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .bag-card h3 {
+        font-size: 1.2rem;
+        line-height: 1.25;
+        margin: 10px 0 6px;
+      }
+
+      /* Specs */
+      .bag-specs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        font-size: 10px;
+        color: #888;
+        margin-top: 6px;
+      }
+
+      .stars {
+        color: #ffcc00;
+        margin: 5px 0;
+        font-size: 12px;
+      }
+      .review-count {
+        font-size: 10px;
+        color: gray;
+        margin-left: 5px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .bag-card .cta-wa {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+      }
+
+      /* MODAL */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 3000;
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+      }
+      .modal-content input,
+      .modal-content textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .shop-controls {
+          grid-template-columns: 1fr;
+        }
+        .shop-grid {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 20px 5%;
+        }
+        .bag-card img {
+          height: 125px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo-container" style="text-decoration: none">
+        <img
+          src="Logo.jpeg"
+          alt="Logo"
+          class="logo-img"
+          onerror="this.src = 'https://via.placeholder.com/45'"
+        />
+        <div class="brand"><h1>Your Bags Kampala</h1></div>
+      </a>
+      <nav>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="shop.html">Products</a>
+        <a href="https://wa.me/256764266189" target="_blank" class="cta-wa"
+          >WhatsApp</a
+        >
+      </nav>
+    </header>
+
+    <!-- SEARCH & SORT AREA -->
+    <div class="shop-controls">
+      <div class="search-wrapper">
+        <i class="fa fa-search"></i>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search dozens of styles..."
+          onkeyup="handleSearch()"
+        />
+      </div>
+      <select id="sortOrder" class="sort-select" onchange="handleSort()">
+        <option value="default">Sort: Recommended</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+      </select>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filter-bar">
+      <button class="f-btn active" data-cat="all" onclick="filterBags('all', this)">
+        All
+      </button>
+      <button class="f-btn" data-cat="handbags" onclick="filterBags('handbags', this)">
+        Handbags
+      </button>
+      <button class="f-btn" data-cat="Shoulder Bags" onclick="filterBags('Shoulder Bags', this)">
+        Shoulder Bags
+      </button>
+      <button class="f-btn" data-cat="Tote Bags" onclick="filterBags('Tote Bags', this)">
+        Tote Bags
+      </button>
+      <button class="f-btn" data-cat="Laptop Bags" onclick="filterBags('Laptop Bags', this)">
+        Laptop Bags
+      </button>
+      <button class="f-btn" data-cat="Clutch Bags" onclick="filterBags('Clutch Bags', this)">
+        Clutch Bags
+      </button>
+      <button class="f-btn" data-cat="Min Bags" onclick="filterBags('Min Bags', this)">
+        Min Bags
+      </button>
+      <button class="f-btn" data-cat="Backpack Bags" onclick="filterBags('Backpack Bags', this)">
+        Backpack Bags
+      </button>
+      <button class="f-btn" data-cat="Travel Bags" onclick="filterBags('Travel Bags', this)">
+        Travel Bags
+      </button>
+    </div>
+
+    <!-- MAIN SHOP DISPLAY -->
+    <div id="shop-container" class="shop-grid"></div>
+
+    <!-- REVIEW MODAL -->
+    <div id="reviewModal" class="modal">
+      <div class="modal-content">
+        <h3>Write a Review</h3>
+        <input type="text" id="revName" placeholder="Your Name" />
+        <select
+          id="revRating"
+          style="width: 100%; padding: 10px; border-radius: 10px"
+        >
+          <option value="5">5 Stars - Excellent</option>
+          <option value="4">4 Stars - Very Good</option>
+          <option value="3">3 Stars - Average</option>
+        </select>
+        <textarea
+          id="revComment"
+          placeholder="Your experience..."
+          rows="4"
+        ></textarea>
+        <button
+          onclick="submitReview()"
+          class="cta-wa"
+          style="width: 100%; border: none; cursor: pointer"
+        >
+          Submit Review
+        </button>
+        <button
+          onclick="closeModal()"
+          style="
+            background: none;
+            border: none;
+            color: gray;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+          "
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <script src="js/runtime-config.js"></script>
+    <script src="js/config.js"></script>
+    <script>
+      let allBags = [];
+      let displayedBags = [];
+      let currentBagId = null;
+
+      async function load() {
+        const fetchJson = async (url) => {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`Request failed: ${url}`);
+          return res.json();
+        };
+
+        try {
+          let products = [];
+
+          // Try API first (works when running the Node server).
+          try {
+            products = await fetchJson(apiUrl("/api/products"));
+          } catch (_) {
+            products = [];
+          }
+
+          // If API fails or is empty, try local JSON files (works in Live Server/static mode).
+          if (!Array.isArray(products) || products.length === 0) {
+            const fallbacks = ["products.json", "./products.json", "../products.json", "/products.json"];
+            for (const url of fallbacks) {
+              try {
+                products = await fetchJson(url);
+                if (Array.isArray(products) && products.length > 0) break;
+              } catch (_) {
+                // Continue trying the next fallback URL.
+              }
+            }
+          }
+
+          if (!Array.isArray(products) || products.length === 0) {
+            throw new Error("No products available");
+          }
+
+          allBags = products;
+          displayedBags = [...allBags];
+          applyCategoryFromUrl();
+          render(displayedBags);
+        } catch (error) {
+          const container = document.getElementById("shop-container");
+          container.innerHTML =
+            "<p style='grid-column:1/-1;color:#d63031;text-align:center;'>Failed to load products. Please refresh.</p>";
+        }
+      }
+
+      function render(items) {
+        const container = document.getElementById("shop-container");
+
+        if (items.length === 0) {
+          container.innerHTML = `
+                <div style="grid-column: 1/-1; text-align:center; padding: 80px 20px;">
+                    <i class="fa fa-search" style="font-size:40px; color:#ddd; margin-bottom:15px;"></i>
+                    <h3>No bags found</h3>
+                    <p style="color:gray;">Try a different search term or category.</p>
+                </div>`;
+          return;
+        }
+
+        container.innerHTML = items
+          .map((bag) => {
+            const reviews = bag.reviews || [];
+            const productId = bag._id || "";
+            const rawImage = typeof bag.image === "string" ? bag.image.trim() : "";
+            let imageSrc = "images/bag-placeholder.svg";
+            if (rawImage) {
+              if (productId) {
+                imageSrc = resolveApiImageUrl(rawImage);
+              } else if (/^(https?:)?\/\//i.test(rawImage) || rawImage.startsWith("data:")) {
+                imageSrc = rawImage;
+              } else if (rawImage.startsWith("/")) {
+                imageSrc = rawImage;
+              } else if (
+                rawImage.startsWith("images/") ||
+                rawImage.startsWith("./images/")
+              ) {
+                imageSrc = rawImage.replace(/^\.\//, "");
+              } else {
+                imageSrc = `images/${rawImage}`;
+              }
+            }
+            const avgRating =
+              reviews.length > 0
+                ? (
+                    reviews.reduce((a, b) => a + parseInt(b.rating), 0) /
+                    reviews.length
+                  ).toFixed(1)
+                : "5.0";
+
+            // Show "New" badge for the most recent 4 items
+            const isNew =
+              allBags.indexOf(bag) < 4 ? '<span class="badge">New</span>' : "";
+
+            return `
+                <div class="bag-card">
+                    ${isNew}
+                    <!-- UPDATED LINE BELOW: Added onclick to open the lightbox -->
+                    <img src="${imageSrc}" 
+                         onclick="openLightbox('${imageSrc}', '${bag.name}')" 
+                         style="cursor: zoom-in;" 
+                         onerror="this.onerror=null;this.src='images/bag-placeholder.svg'">
+                    
+                    <div class="bag-specs">
+                        <span><i class="fa fa-tag"></i> ${bag.category}</span>
+                        <span><i class="fa fa-check"></i> In Stock</span>
+                    </div>
+                    <h3>${bag.name}</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i> ${avgRating} 
+                        <span class="review-count" onclick="openReviewModal('${productId}')">(${reviews.length} reviews)</span>
+                    </div>
+                    <p style="font-weight:bold; color:var(--purple); font-size: 1.1rem;">UGX ${Number(bag.price).toLocaleString()}</p>
+                    <a href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20${encodeURIComponent(bag.name)}" 
+                       target="_blank" class="cta-wa" style="display:block;margin-top:10px;text-decoration:none;">Order via WhatsApp</a>
+                </div>
+                `;
+          })
+          .join("");
+      }
+
+      // ADD THIS NEW FUNCTION BELOW THE RENDER FUNCTION
+      function openLightbox(src, name) {
+        document.getElementById("modalImg").src = src;
+        document.getElementById("modalName").innerText = name;
+        document.getElementById("imageModal").style.display = "flex";
+      }
+
+      function handleSearch() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        displayedBags = allBags.filter(
+          (bag) =>
+            bag.name.toLowerCase().includes(query) ||
+            bag.category.toLowerCase().includes(query),
+        );
+        render(displayedBags);
+      }
+
+      function filterBags(category, btn) {
+        const buttons = document.querySelectorAll(".f-btn");
+        buttons.forEach((b) => b.classList.remove("active"));
+
+        const buttonToActivate =
+          btn || Array.from(buttons).find((b) => b.dataset.cat === category);
+        if (buttonToActivate) buttonToActivate.classList.add("active");
+
+        if (category === "all") displayedBags = [...allBags];
+        else
+          displayedBags = allBags.filter(
+            (b) => b.category.toLowerCase() === category.toLowerCase(),
+          );
+
+        render(displayedBags);
+      }
+
+      function applyCategoryFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const category = params.get("cat");
+        if (category) {
+          filterBags(category, null);
+        }
+      }
+
+      function handleSort() {
+        const order = document.getElementById("sortOrder").value;
+        if (order === "low") {
+          displayedBags.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
+        } else if (order === "high") {
+          displayedBags.sort((a, b) => Number(b.price || 0) - Number(a.price || 0));
+        } else {
+          load(); // Reload original order
+          return;
+        }
+        render(displayedBags);
+      }
+
+      function openReviewModal(productId) {
+        if (!productId) {
+          alert("Reviews are enabled after products are saved in your database.");
+          return;
+        }
+
+        currentBagId = productId;
+        document.getElementById("reviewModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("reviewModal").style.display = "none";
+      }
+
+      async function submitReview() {
+        const name = document.getElementById("revName").value.trim();
+        const comment = document.getElementById("revComment").value.trim();
+        if (!name || !comment) return alert("Please fill all fields");
+        if (!currentBagId) return alert("Please choose a product again.");
+
+        const review = {
+          user: name,
+          rating: document.getElementById("revRating").value,
+          comment: comment,
+        };
+
+        const res = await fetch(apiUrl(`/api/products/${currentBagId}/review`), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(review),
+        });
+        if (!res.ok) return alert("Failed to submit review. Please try again.");
+
+        alert("Thank you! Review submitted.");
+        closeModal();
+        document.getElementById("revName").value = "";
+        document.getElementById("revComment").value = "";
+        load();
+      }
+
+      load();
+    </script>
+    <!-- PHOTO LIGHTBOX MODAL -->
+    <div id="imageModal" class="modal" onclick="this.style.display = 'none'">
+      <span
+        style="
+          position: absolute;
+          top: 20px;
+          right: 30px;
+          color: white;
+          font-size: 40px;
+          cursor: pointer;
+        "
+        >&times;</span
+      >
+      <img
+        id="modalImg"
+        style="
+          max-width: 90%;
+          max-height: 80%;
+          border-radius: 15px;
+          box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        "
+      />
+      <h2
+        id="modalName"
+        style="
+          color: white;
+          margin-top: 20px;
+          font-family: &quot;Playfair Display&quot;, serif;
+        "
+      ></h2>
+    </div>
+  </body>
+</html>
+
+

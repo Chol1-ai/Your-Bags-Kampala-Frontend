@@ -1,0 +1,91 @@
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px 5%;
+}
+.contact-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+}
+.contact-form button {
+  background:green;
+  color: black;
+  padding: 12px 25px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.info-card {
+  background: #f4f4f4;
+  padding: 25px;
+  border-left: 4px solid var(--abanista-orange);
+}
+
+/* Container Layout */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  padding: 60px 8%;
+  align-items: start;
+}
+
+/* Form Styling */
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #0a0000;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--purple);
+}
+
+/* THE BUTTON STYLING */
+.submit-btn {
+  background-color: var(--purple);
+  color: white;
+  padding: 16px 30px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: fit-content; /* Makes button size match the text */
+}
+
+.submit-btn:hover {
+  background-color: #6a11cb;
+  transform: translateY(-2px);
+}
+
+/* Info Card (Right Side) */
+.info-card {
+  background: #f9f9f9;
+  padding: 40px;
+  border-radius: 20px;
+  line-height: 2;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    padding: 40px 5%;
+  }
+}

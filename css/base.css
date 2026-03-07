@@ -1,0 +1,300 @@
+:root {
+  --purple: #25d366;
+  --dark: #1a1c22;
+  --cream: #fdfaf7;
+  --text: #666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: rgba(65, 63, 63, 0.137);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-img {
+  width: 40px; /* Slightly smaller for the footer */
+  height: 40px; /* Must match width */
+  border-radius: 50%; /* Makes it a circle */
+  object-fit: cover; /* Prevents stretching */
+  border: 1px solid #ddd; /* Subtle border to make it stand out against the background */
+  background-color: white;
+}
+
+/* Also apply the fix to the footer logo */
+.logo-img-footer {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: contain; /* Same fix */
+  padding: 6px; /* Same fix */
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.brand h1 {
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.brand p {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  margin-left: 25px;
+  font-weight: 600;
+}
+.cta-wa {
+  background: var(--purple);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+footer {
+  padding: 60px 8%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  border-top: 1px solid #22f00b;
+}
+/* Footer Link Styling */
+.footer-link {
+  display: block;
+  text-decoration: none;
+  color: #666;
+  margin-bottom: 12px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-link:hover {
+  color: var(--purple);
+  padding-left: 5px; /* Subtle move effect */
+}
+
+/* Social Media Icon Styling */
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.social-links i {
+  font-size: 18px;
+  width: 20px; /* Keeps icons aligned */
+}
+
+.social-links a:hover {
+  color: var(--purple);
+}
+
+/* Specific Brand Colors on Hover (Optional) */
+.social-links a:hover .fa-tiktok {
+  color: #000;
+}
+.social-links a:hover .fa-instagram {
+  color: #e1306c;
+}
+.social-links a:hover .fa-twitter {
+  color: #1da1f2;
+}
+
+/* 1. Remove Underline from ALL links */
+a {
+  text-decoration: none; /* This removes the underline */
+}
+
+/* 2. Style the Navigation Links */
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: blue;
+  text-decoration: none; /* Ensures underline doesn't come back on hover */
+}
+
+/* 3. Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  bottom: 24px;
+  right: 24px;
+  background-color: #25d366;
+  color: rgb(247, 245, 245);
+  border-radius: 50px;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10000; /* Stays on top of everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-float:hover {
+  background-color: #128c7e;
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none !important; /* Forces underline away */
+}
+
+.brand h1 {
+  line-height: 1;
+  margin: 0;
+  font-size: 22px;
+}
+
+.brand p {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* Smooth Scroll for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* The Animation Styles */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Circular Logo for Footer */
+.logo-img-footer {
+  width: 40px; /* Slightly smaller for the footer */
+  height: 40px; /* Must match width */
+  border-radius: 50%; /* Makes it a circle */
+  object-fit: cover; /* Prevents stretching */
+  border: 1px solid #ddd; /* Subtle border to make it stand out against the background */
+  background-color: white;
+}
+
+/* Ensure the footer brand area is aligned */
+footer div:first-child h3 {
+  font-family:
+    "Inter", sans-serif; /* Or 'Playfair Display' if you chose that */
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  /* 1. Make the header clean */
+  header {
+    padding: 10px 5%;
+    justify-content: space-between;
+  }
+
+  /* 2. Hide the text links (About, Products, etc.) in the top header only */
+  nav a:not(.cta-wa) {
+    display: none;
+  }
+
+  /* 3. Shrink the WhatsApp button so it doesn't overlap */
+  .cta-wa {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  /* 4. Shrink the brand text so it fits */
+  .brand h1 {
+    font-size: 16px !important;
+  }
+  .brand p {
+    display: none; /* Hide tagline on tiny screens to save space */
+  }
+
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .whatsapp-float {
+    width: 42px;
+    height: 42px;
+    bottom: 80px;
+    right: 14px;
+    font-size: 20px;
+  }
+}
+
+/* BOTTOM NAVIGATION BAR */
+.mobile-bottom-nav {
+  display: none; /* Hidden on Laptops */
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 9999;
+  }
+
+  .mobile-bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+    font-size: 11px;
+  }
+
+  .mobile-bottom-nav i {
+    font-size: 20px;
+    margin-bottom: 3px;
+    color: var(--purple);
+  }
+
+  /* Add space at the bottom of the body so content isn't hidden by the bar */
+  body {
+    padding-bottom: 70px;
+  }
+}

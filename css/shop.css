@@ -1,0 +1,84 @@
+.shop-banner {
+  background: #ff0303;
+  padding: 60px 5%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.shop-banner h1 {
+  font-size: 36px;
+}
+
+.shop-container {
+  display: flex;
+  padding: 0 5%;
+  gap: 40px;
+}
+.sidebar {
+  width: 250px;
+}
+.sidebar-box {
+  margin-bottom: 40px;
+}
+.sidebar-box h3 {
+  font-size: 18px;
+  border-bottom: 2px solid var(--eiser-green);
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.sidebar-box ul {
+  list-style: none;
+}
+.sidebar-box ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* Filter Bar Container */
+.filter-wrapper {
+    background: white;
+    padding: 20px 5%;
+    position: sticky;
+    top: 80px; /* Sits right under the header */
+    z-index: 900;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto; /* Allow horizontal scroll on phones */
+    white-space: nowrap;
+    padding-bottom: 10px;
+    scrollbar-width: none; /* Hide scrollbar for clean look */
+}
+
+.filter-bar::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+    padding: 10px 25px;
+    border: 1.5px solid var(--purple);
+    background: white;
+    color: var(--purple);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.filter-btn.active {
+    background: var(--purple);
+    color: white;
+    box-shadow: 0 4px 12px rgba(125, 42, 232, 0.3);
+}
+
+.filter-btn:hover {
+    background: var(--beige);
+}
+
+/* Shop Grid spacing adjustment */
+.shop-grid {
+    padding-top: 30px;
+}
