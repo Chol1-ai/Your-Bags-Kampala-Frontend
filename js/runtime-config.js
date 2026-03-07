@@ -10,5 +10,5 @@
   }
 
   window.__API_BASE__ =
-    window.__API_BASE__ || "https://REPLACE-WITH-YOUR-RENDER-URL.onrender.com";
+    window.__API_BASE__ || "https://your-bags-kampala.onrender.com";
 })();
