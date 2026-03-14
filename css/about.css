@@ -3,8 +3,8 @@
   background:
     linear-gradient(
       135deg,
-      rgba(26, 26, 26, 0.9) 0%,
-      rgba(45, 52, 54, 0.9) 100%
+      rgba(26, 26, 26, 0.8) 0%,
+      rgba(45, 52, 54, 0.8) 100%
     ),
     url("../images/afro-beauti-african-american-adult.jpg");
   background-size: cover;
@@ -23,8 +23,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("../images/Kampala.jpg") center/cover;
+  background: url("../images/afro-beauti-african-american-adult.jpg")
+    center/cover;
   opacity: 0.3;
+  z-index: 0;
+}
+
+.about-hero h1,
+.about-hero p {
+  position: relative;
+  z-index: 1;
 }
 
 .about-hero h1 {
