@@ -104,8 +104,29 @@
           max-width: 450px;
           max-height: 90vh;
           overflow-y: auto;
+          position: relative;
         "
       >
+        <button
+          onclick="closeCheckoutForm()"
+          style="
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f0f0f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          ×
+        </button>
         <h2 style="margin-top: 0; color: #333">
           <i class="fas fa-credit-card"></i> Checkout
         </h2>
