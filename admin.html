@@ -476,6 +476,28 @@
     </style>
   </head>
   <body>
+    <!-- Back Button -->
+    <button
+      id="backBtn"
+      onclick="showTab('all')"
+      style="
+        display: none;
+        position: fixed;
+        top: 100px;
+        left: 20px;
+        z-index: 9999;
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      "
+    >
+      <i class="fas fa-arrow-left"></i> Back to All
+    </button>
     <!-- Admin Login -->
     <div id="loginOverlay">
       <div class="login-box">
@@ -1231,6 +1253,14 @@
           sections.forEach((section) => {
             section.style.display = "block";
           });
+        }
+
+        // Show/hide back button
+        const backBtn = document.getElementById("backBtn");
+        if (tabId === "all") {
+          backBtn.style.display = "none";
+        } else {
+          backBtn.style.display = "flex";
         }
 
         // Scroll to top
