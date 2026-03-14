@@ -1186,13 +1186,15 @@
         let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
         document.getElementById("checkoutTotal").textContent =
           "UGX " + total.toLocaleString();
+        // Close cart first, then show checkout
+        document.getElementById("cartSidebar").classList.remove("active");
+        document.getElementById("cartOverlay").style.display = "none";
+        // Show checkout modal
         document.getElementById("checkoutModal").style.display = "flex";
-        document.getElementById("checkoutOverlay").style.display = "block";
       }
 
       function closeCheckoutModal() {
         document.getElementById("checkoutModal").style.display = "none";
-        document.getElementById("checkoutOverlay").style.display = "none";
       }
 
       function processPaymentShop(e) {
