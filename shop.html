@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Shop Collection | Your Bags Kampala</title>
     <link rel="stylesheet" href="css/base.css" />
     <link
@@ -61,10 +64,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        touch-action: manipulation;
+        position: relative;
+        z-index: 10003;
       }
 
       .close-cart:hover {
         background: rgba(255, 255, 255, 0.3);
+      }
+
+      .close-cart:active {
+        background: rgba(255, 255, 255, 0.5);
       }
 
       /* Mobile touch-friendly */

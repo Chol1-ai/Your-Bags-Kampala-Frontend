@@ -339,10 +339,17 @@
   align-items: center;
   justify-content: center;
   transition: background 0.3s;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 10003;
 }
 
 .close-cart:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.close-cart:active {
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .cart-items {
