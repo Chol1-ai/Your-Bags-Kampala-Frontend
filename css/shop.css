@@ -1,11 +1,12 @@
 .shop-banner {
-  background: #ff0303;
+  background: var(--primary);
   padding: 60px 5%;
   text-align: center;
   margin-bottom: 50px;
 }
 .shop-banner h1 {
   font-size: 36px;
+  color: white;
 }
 
 .shop-container {
@@ -37,48 +38,51 @@
 
 /* Filter Bar Container */
 .filter-wrapper {
-    background: white;
-    padding: 20px 5%;
-    position: sticky;
-    top: 80px; /* Sits right under the header */
-    z-index: 900;
-    border-bottom: 1px solid #eee;
+  background: white;
+  padding: 20px 5%;
+  position: sticky;
+  top: 80px; /* Sits right under the header */
+  z-index: 900;
+  border-bottom: 1px solid #eee;
 }
 
 .filter-bar {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto; /* Allow horizontal scroll on phones */
-    white-space: nowrap;
-    padding-bottom: 10px;
-    scrollbar-width: none; /* Hide scrollbar for clean look */
+  display: flex;
+  gap: 12px;
+  overflow-x: auto; /* Allow horizontal scroll on phones */
+  white-space: nowrap;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Hide scrollbar for clean look */
 }
 
-.filter-bar::-webkit-scrollbar { display: none; }
+.filter-bar::-webkit-scrollbar {
+  display: none;
+}
 
 .filter-btn {
-    padding: 10px 25px;
-    border: 1.5px solid var(--purple);
-    background: white;
-    color: var(--purple);
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: 0.3s;
+  padding: 10px 25px;
+  border: 1.5px solid var(--primary);
+  background: white;
+  color: var(--primary);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
 .filter-btn.active {
-    background: var(--purple);
-    color: white;
-    box-shadow: 0 4px 12px rgba(125, 42, 232, 0.3);
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
 .filter-btn:hover {
-    background: var(--beige);
+  background: var(--background);
 }
 
 /* Shop Grid spacing adjustment */
 .shop-grid {
-    padding-top: 30px;
+  padding-top: 30px;
 }

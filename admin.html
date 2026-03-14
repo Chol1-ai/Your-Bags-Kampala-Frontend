@@ -2,277 +2,1201 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard | Your Bags Kampala</title>
     <link rel="stylesheet" href="css/base.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        padding: 40px 8%;
-        font-family: "Inter", sans-serif;
-        background: #fff;
-      }
-      .admin-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: start;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f6fa;
       }
 
-      /* Form Styling */
-      .admin-box {
-        background: #fdfaf7;
-        padding: 30px;
-        border-radius: 20px;
-        border: 1px solid #eee;
-      }
-      input,
-      select {
+      /* Admin Login Overlay */
+      #loginOverlay {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        border: 1px solid #ddd;
-        outline: none;
-      }
-      label {
-        font-size: 12px;
-        font-weight: bold;
-        color: #2ecc71;
-        display: block;
-        margin-bottom: 5px;
-      }
-      .upload-btn {
-        background: #2ecc71;
-        color: white;
-        border: none;
-        padding: 15px;
-        border-radius: 12px;
-        width: 100%;
-        font-weight: bold;
-        cursor: pointer;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
       }
 
-      /* Inventory List Styling */
-      .inventory-section {
+      .login-box {
         background: white;
-      }
-      .inventory-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-        margin-top: 20px;
-      }
-      .inv-card {
-        border: 1px solid #eee;
-        padding: 10px;
-        border-radius: 15px;
+        padding: 40px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
         text-align: center;
-        background: #f9f9f9;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       }
-      .inv-card img {
-        width: 100%;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 10px;
+
+      .login-box h2 {
+        color: #333;
         margin-bottom: 10px;
       }
-      .delete-btn {
-        background: #ff4757;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 12px;
-        margin-top: 5px;
-      }
-      .status {
-        margin-top: 12px;
-        font-size: 14px;
-      }
-      .status.ok {
-        color: #2e7d32;
-      }
-      .status.error {
-        color: #c62828;
+
+      .login-box p {
+        color: #666;
+        margin-bottom: 25px;
       }
 
+      .login-box input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+
+      .login-box button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      #loginError {
+        color: #dc2626;
+        font-size: 14px;
+        display: none;
+        margin-bottom: 15px;
+      }
+
+      /* Admin Content */
+      #adminContent {
+        display: none;
+      }
+
+      /* Header */
+      .admin-header-new {
+        background: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .admin-header-new h1 {
+        color: #333;
+        font-size: 1.5rem;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .admin-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .admin-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .logout-btn-new {
+        padding: 10px 20px;
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      /* Stats Cards */
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 30px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+      }
+
+      .stat-icon.blue {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .stat-icon.green {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      }
+      .stat-icon.orange {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+      .stat-icon.yellow {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      }
+
+      .stat-info h3 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .stat-info p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      /* Main Content Area */
+      .main-content {
+        padding: 0 30px 30px;
+      }
+
+      .section-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .section-header h2 {
+        color: #333;
+        font-size: 1.3rem;
+      }
+
+      .add-btn {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Data Table */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .data-table th {
+        text-align: left;
+        padding: 15px;
+        background: #f8f9fa;
+        color: #666;
+        font-weight: 600;
+        border-bottom: 2px solid #eee;
+      }
+
+      .data-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        color: #333;
+      }
+
+      .data-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .table-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .action-btns {
+        display: flex;
+        gap: 10px;
+      }
+
+      .edit-btn,
+      .delete-btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+
+      .edit-btn {
+        background: #667eea;
+        color: white;
+      }
+
+      .delete-btn {
+        background: #dc2626;
+        color: white;
+      }
+
+      .stock-badge {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .stock-badge.in-stock {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .stock-badge.out-of-stock {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .order-status {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 380px;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 12px;
+        color: #333;
+        font-size: 1.1rem;
+      }
+
+      .modal-content input,
+      .modal-content select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+
+      .modal-content label {
+        display: block;
+        margin-bottom: 4px;
+        color: #666;
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .modal-btns {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .modal-btns button {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 13px;
+      }
+
+      .save-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .cancel-btn {
+        background: #e5e7eb;
+        color: #333;
+      }
+
+      .image-preview {
+        width: 100%;
+        height: 80px;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        margin-bottom: 15px;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Quick Actions */
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
+
+      .quick-action-btn {
+        padding: 20px;
+        background: white;
+        border: 2px dashed #ddd;
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: #666;
+      }
+
+      .quick-action-btn:hover {
+        border-color: #667eea;
+        color: #667eea;
+        transform: translateY(-3px);
+      }
+
+      .quick-action-btn i {
+        font-size: 30px;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      /* Responsive */
       @media (max-width: 768px) {
-        .admin-layout {
+        .stats-container {
+          padding: 15px;
           grid-template-columns: 1fr;
+        }
+
+        .main-content {
+          padding: 0 15px 15px;
+        }
+
+        .admin-header-new {
+          padding: 15px;
+        }
+
+        .data-table {
+          font-size: 12px;
+        }
+
+        .data-table th,
+        .data-table td {
+          padding: 8px;
         }
       }
     </style>
   </head>
   <body>
-    <h1>Manage Inventory</h1>
-    <p style="color: gray; margin-bottom: 30px">
-      Add or remove bags from your online shop.
-    </p>
+    <!-- Admin Login -->
+    <div id="loginOverlay">
+      <div class="login-box">
+        <div
+          id="loginProfileIcon"
+          style="
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+          "
+        >
+          <i class="fas fa-lock" style="font-size: 30px; color: white"></i>
+        </div>
+        <div
+          id="loginProfileImg"
+          style="
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            background: #eee;
+            display: none;
+          "
+        >
+          <img
+            id="loginProfileImgTag"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <h2>Admin Login</h2>
+        <p>Enter your credentials</p>
+        <input type="text" id="adminUsername" placeholder="Username" />
+        <input type="password" id="adminPassword" placeholder="Password" />
+        <p id="loginError">Invalid username or password</p>
+        <button onclick="adminLogin()">Login</button>
+      </div>
+    </div>
 
-    <div class="admin-layout">
-      <!-- LEFT SIDE: THE FORM -->
-      <div class="admin-box">
-        <form id="addBagForm" enctype="multipart/form-data">
-          <label>Bag Name</label>
-          <input type="text" id="name" name="name" required />
-
-          <label>Price (Numbers Only)</label>
-          <input type="number" id="price" name="price" required />
-
-          <label>Collection</label>
-          <select id="category" name="category" required>
-            <option value="handbags">Handbags</option>
-            <option value="Shoulder Bags">Shoulder Bags</option>
-            <option value="Tote Bags">Tote Bags</option>
-            <option value="Laptop Bags">Laptop Bags</option>
-            <option value="Clutch Bags">Clutch Bags</option>
-            <option value="Min Bags">Min Bags</option>
-            <option value="Backpack Bags">Backpack Bags</option>
-            <option value="Travel Bags">Travel Bags</option>
-          </select>
-
-          <label>Select Bag Photo</label>
+    <!-- Admin Content -->
+    <div id="adminContent">
+      <!-- Header -->
+      <header class="admin-header-new">
+        <h1><i class="fas fa-cog"></i> Admin Dashboard</h1>
+        <div class="header-right">
+          <div
+            class="admin-avatar"
+            id="adminAvatar"
+            onclick="document.getElementById('avatarInput').click()"
+          >
+            <i class="fas fa-user"></i>
+            <img id="adminAvatarImg" style="display: none" />
+          </div>
           <input
             type="file"
-            id="imageInput"
-            name="image"
+            id="avatarInput"
             accept="image/*"
-            required
+            style="display: none"
+            onchange="updateAvatar(this)"
           />
+          <button class="logout-btn-new" onclick="adminLogout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </header>
 
-          <button type="submit" class="upload-btn">Upload Bag to Store</button>
-          <p id="form-status" class="status"></p>
-        </form>
+      <!-- Stats -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalProducts">0</h3>
+            <p>Total Products</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalOrders">12</h3>
+            <p>Total Orders</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalCustomers">48</h3>
+            <p>Total Customers</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalRevenue">UGX 0</h3>
+            <p>Total Revenue</p>
+          </div>
+        </div>
       </div>
 
-      <!-- RIGHT SIDE: THE DELETE SECTION -->
-      <div class="inventory-section">
-        <h2>Live Inventory</h2>
-        <p id="inventory-status" class="status"></p>
-        <div id="inventory-list" class="inventory-grid">
-          <!-- BAGS WILL APPEAR HERE WITH DELETE BUTTONS -->
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Products Section -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2><i class="fas fa-box"></i> Products</h2>
+            <button class="add-btn" onclick="openProductModal()">
+              <i class="fas fa-plus"></i> Add Product
+            </button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody">
+              <!-- Products will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Customers Section -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2><i class="fas fa-users"></i> Customers</h2>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Date Joined</th>
+              </tr>
+            </thead>
+            <tbody id="customerTableBody">
+              <!-- Customers will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Orders Section -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2><i class="fas fa-shopping-bag"></i> Orders</h2>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="orderTableBody">
+              <!-- Orders will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+          </div>
+          <div class="quick-actions">
+            <div class="quick-action-btn" onclick="openProductModal()">
+              <i class="fas fa-plus-circle"></i>
+              Add Product
+            </div>
+            <div class="quick-action-btn" onclick="showTab('orders')">
+              <i class="fas fa-list"></i>
+              View Orders
+            </div>
+            <div class="quick-action-btn" onclick="showTab('customers')">
+              <i class="fas fa-user-plus"></i>
+              Add Customer
+            </div>
+            <div
+              class="quick-action-btn"
+              onclick="window.location.href = 'index.html'"
+            >
+              <i class="fas fa-home"></i>
+              Go to Website
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <script src="js/runtime-config.js"></script>
-    <script src="js/config.js"></script>
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <h2 id="modalTitle">Add New Product</h2>
+        <form id="productForm">
+          <input type="hidden" id="productId" />
+
+          <label>Product Name</label>
+          <input type="text" id="productName" required />
+
+          <label>Price (UGX)</label>
+          <input type="number" id="productPrice" required />
+
+          <label>Stock Quantity</label>
+          <input type="number" id="productStock" value="1" min="0" required />
+
+          <label>Category</label>
+          <select id="productCategory" required>
+            <option value="Handbags">Handbags</option>
+            <option value="Shoulder Bags">Shoulder Bags</option>
+            <option value="Tote Bags">Tote Bags</option>
+            <option value="Laptop Bags">Laptop Bags</option>
+            <option value="Clutch Bags">Clutch Bags</option>
+            <option value="Backpack Bags">Backpack Bags</option>
+            <option value="Travel Bags">Travel Bags</option>
+          </select>
+
+          <label>Product Image</label>
+          <div
+            class="image-preview"
+            id="productImagePreview"
+            onclick="document.getElementById('productImage').click()"
+          >
+            <span>Tap to select image</span>
+          </div>
+          <input
+            type="file"
+            id="productImage"
+            accept="image/*"
+            style="display: none"
+          />
+          <input type="hidden" id="productImageBase64" />
+
+          <div class="modal-btns">
+            <button type="submit" class="save-btn">Save Product</button>
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeProductModal()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script>
-      // Check password first
-      const pass = prompt("Enter Admin Password:");
-      if (pass !== "KAMPALA2026") {
-        window.location.href = "index.html";
-        throw new Error("Unauthorized admin access");
-      }
+      // Admin Security
+      const ADMIN_SESSION_TIMEOUT = 30 * 60 * 1000;
+      let lastActivity = Date.now();
+      let failedAttempts = 0;
 
-      function setStatus(id, message, type = "") {
-        const el = document.getElementById(id);
-        el.className = type ? `status ${type}` : "status";
-        el.textContent = message;
+      function updateActivity() {
+        lastActivity = Date.now();
       }
+      document.addEventListener("click", updateActivity);
+      document.addEventListener("keypress", updateActivity);
 
-      async function getErrorMessage(response, fallback) {
-        try {
-          const data = await response.json();
-          return data && data.message ? data.message : fallback;
-        } catch (error) {
-          return fallback;
+      function checkSession() {
+        if (localStorage.getItem("adminLoggedIn") === "true") {
+          if (Date.now() - lastActivity > ADMIN_SESSION_TIMEOUT) {
+            adminLogout();
+          }
         }
       }
+      setInterval(checkSession, 60000);
 
-      // 1. Function to fetch and show the bags
-      async function loadInventory() {
-        const container = document.getElementById("inventory-list");
-        setStatus("inventory-status", "Loading inventory...");
+      // Admin Login
+      function adminLogin() {
+        const username = document.getElementById("adminUsername").value;
+        const password = document.getElementById("adminPassword").value;
 
-        try {
-          const res = await fetch(apiUrl("/api/products"));
-          if (!res.ok) {
-            throw new Error(await getErrorMessage(res, "Failed to load inventory."));
-          }
-
-          const bags = await res.json();
-
-          if (bags.length === 0) {
-            container.innerHTML =
-              "<p style='color:gray;'>No bags in store yet.</p>";
-            setStatus("inventory-status", "");
-            return;
-          }
-
-          container.innerHTML = bags
-            .map(
-              (bag) => `
-                <div class="inv-card">
-                    <img src="${resolveApiImageUrl(bag.image)}" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'">
-                    <p><strong>${bag.name}</strong></p>
-                    <button class="delete-btn" onclick="deleteBag('${bag._id}')">Delete</button>
-                </div>
-            `,
-            )
-            .join("");
-
-          setStatus("inventory-status", "");
-        } catch (error) {
-          container.innerHTML = "";
-          setStatus(
-            "inventory-status",
-            error.message || "Failed to load inventory.",
-            "error",
+        if (localStorage.getItem("adminLocked") === "true") {
+          const lockTime = parseInt(
+            localStorage.getItem("adminLockTime") || "0",
           );
+          if (Date.now() - lockTime < 15 * 60 * 1000) {
+            document.getElementById("loginError").textContent =
+              "Account locked. Try again in 15 minutes.";
+            document.getElementById("loginError").style.display = "block";
+            return;
+          } else {
+            localStorage.removeItem("adminLocked");
+            localStorage.removeItem("adminLockTime");
+            failedAttempts = 0;
+          }
+        }
+
+        if (username === "admin" && password === "KAMPALA2026") {
+          document.getElementById("loginOverlay").style.display = "none";
+          document.getElementById("adminContent").style.display = "block";
+          localStorage.setItem("adminLoggedIn", "true");
+          lastActivity = Date.now();
+          failedAttempts = 0;
+          loadProducts();
+          updateStats();
+        } else {
+          failedAttempts++;
+          if (failedAttempts >= 3) {
+            localStorage.setItem("adminLocked", "true");
+            localStorage.setItem("adminLockTime", Date.now().toString());
+            document.getElementById("loginError").textContent =
+              "Account locked for 15 minutes.";
+          } else {
+            document.getElementById("loginError").textContent =
+              "Invalid credentials. " +
+              (3 - failedAttempts) +
+              " attempts remaining.";
+          }
+          document.getElementById("loginError").style.display = "block";
         }
       }
 
-      // 2. Function to handle the Upload
-      document.getElementById("addBagForm").onsubmit = async (e) => {
-        e.preventDefault();
-        setStatus("form-status", "Uploading...");
-        const formData = new FormData(e.target);
+      // Check if already logged in
+      if (localStorage.getItem("adminLoggedIn") === "true") {
+        document.getElementById("loginOverlay").style.display = "none";
+        document.getElementById("adminContent").style.display = "block";
+        loadProducts();
+        updateStats();
+      }
 
-        try {
-          const res = await fetch(apiUrl("/api/products"), {
-            method: "POST",
-            body: formData,
-          });
+      // Enter key to login
+      document
+        .getElementById("adminPassword")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") adminLogin();
+        });
 
-          if (!res.ok) {
-            throw new Error(await getErrorMessage(res, "Upload failed."));
-          }
+      // Admin Logout
+      function adminLogout() {
+        localStorage.removeItem("adminLoggedIn");
+        document.getElementById("loginOverlay").style.display = "flex";
+        document.getElementById("adminContent").style.display = "none";
+        document.getElementById("adminUsername").value = "";
+        document.getElementById("adminPassword").value = "";
+        document.getElementById("loginError").style.display = "none";
+        failedAttempts = 0;
+      }
 
-          alert("Bag Uploaded!");
-          e.target.reset();
-          setStatus("form-status", "Upload successful.", "ok");
-          loadInventory();
-        } catch (error) {
-          setStatus("form-status", error.message || "Upload failed.", "error");
+      // Avatar functions
+      function loadAvatar() {
+        const savedAvatar = localStorage.getItem("adminProfile");
+        if (savedAvatar) {
+          document.getElementById("adminAvatarImg").src = savedAvatar;
+          document.getElementById("adminAvatarImg").style.display = "block";
+          document.querySelector("#adminAvatar i").style.display = "none";
+
+          document.getElementById("loginProfileImgTag").src = savedAvatar;
+          document.getElementById("loginProfileImg").style.display = "block";
+          document.getElementById("loginProfileIcon").style.display = "none";
         }
-      };
+      }
+      loadAvatar();
 
-      // 3. Function to Delete a bag
-      async function deleteBag(id) {
-        if (confirm("Are you sure you want to delete this bag?")) {
-          setStatus("inventory-status", "Deleting item...");
+      function updateAvatar(input) {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const base64 = e.target.result;
+            localStorage.setItem("adminProfile", base64);
+            document.getElementById("adminAvatarImg").src = base64;
+            document.getElementById("adminAvatarImg").style.display = "block";
+            document.querySelector("#adminAvatar i").style.display = "none";
 
-          try {
-            const res = await fetch(apiUrl(`/api/products/${id}`), { method: "DELETE" });
-            if (!res.ok) {
-              throw new Error(await getErrorMessage(res, "Delete failed."));
-            }
+            document.getElementById("loginProfileImgTag").src = base64;
+            document.getElementById("loginProfileImg").style.display = "block";
+            document.getElementById("loginProfileIcon").style.display = "none";
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
 
-            setStatus("inventory-status", "Item deleted.", "ok");
-            loadInventory();
-          } catch (error) {
-            setStatus(
-              "inventory-status",
-              error.message || "Delete failed.",
-              "error",
+      // Load Products
+      function loadProducts() {
+        const adminProducts = JSON.parse(
+          localStorage.getItem("adminProducts") || "[]",
+        );
+
+        fetch("products.json")
+          .then((res) => res.json())
+          .then((jsonProducts) => {
+            // Combine admin products with JSON products
+            let allProducts = [...jsonProducts];
+
+            // Add admin products that aren't in JSON
+            adminProducts.forEach((adminP) => {
+              if (!allProducts.find((p) => p.id === adminP.id)) {
+                allProducts.push(adminP);
+              }
+            });
+
+            // Add admin products (they override JSON products with same ID)
+            adminProducts.forEach((adminP) => {
+              const index = allProducts.findIndex((p) => p.id === adminP.id);
+              if (index > -1) {
+                allProducts[index] = adminP;
+              }
+            });
+
+            // Store combined products
+            localStorage.setItem("jsonProducts", JSON.stringify(jsonProducts));
+
+            renderProductTable(allProducts);
+            updateStats();
+          })
+          .catch((e) => {
+            renderProductTable(adminProducts);
+            updateStats();
+          });
+      }
+
+      function renderProductTable(products) {
+        const tbody = document.getElementById("productTableBody");
+        if (products.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="6" style="text-align:center;color:#999;">No products yet</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = products
+          .map(
+            (p) => `
+          <tr>
+            <td><img src="${p.image || "images/bag-placeholder.svg"}" class="table-img" onerror="this.src='images/bag-placeholder.svg'" alt="${p.name}"></td>
+            <td>${p.name}</td>
+            <td>${p.category}</td>
+            <td>UGX ${Number(p.price).toLocaleString()}</td>
+            <td><span class="stock-badge ${(p.stock || 0) > 0 ? "in-stock" : "out-of-stock"}">${p.stock || 0}</span></td>
+            <td class="action-btns">
+              <button class="edit-btn" onclick="editProduct(${p.id}, '${p.name}', ${p.price}, '${p.category}', '${p.image || ""}', ${p.stock || 0})">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="delete-btn" onclick="deleteProduct(${p.id})">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+        `,
+          )
+          .join("");
+      }
+
+      function updateStats() {
+        // Total Products
+        const products = JSON.parse(
+          localStorage.getItem("adminProducts") || "[]",
+        );
+        const jsonProducts = JSON.parse(
+          localStorage.getItem("jsonProducts") || "[]",
+        );
+        const totalProducts = products.length + jsonProducts.length;
+        document.getElementById("totalProducts").textContent = totalProducts;
+
+        // Total Orders - from saved orders
+        const savedOrders = JSON.parse(localStorage.getItem("orders") || "[]");
+        const totalOrders = savedOrders.length;
+        document.getElementById("totalOrders").textContent = totalOrders;
+
+        // Total Customers - from checkout customers
+        const customers = JSON.parse(localStorage.getItem("customers") || "[]");
+        const totalCustomers = customers.length;
+        document.getElementById("totalCustomers").textContent = totalCustomers;
+
+        // Calculate revenue from orders
+        let revenue = 0;
+        savedOrders.forEach((order) => {
+          revenue += order.total || 0;
+        });
+
+        document.getElementById("totalRevenue").textContent =
+          "UGX " + revenue.toLocaleString();
+
+        // Load customers and orders tables
+        loadCustomers();
+        loadOrders();
+      }
+
+      // Load Customers Table
+      function loadCustomers() {
+        const customers = JSON.parse(localStorage.getItem("customers") || "[]");
+        const tbody = document.getElementById("customerTableBody");
+
+        if (customers.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="6" style="text-align:center;color:#999;">No customers yet</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = customers
+          .map(
+            (c, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${c.name || "N/A"}</td>
+              <td>${c.phone || "N/A"}</td>
+              <td>${c.email || "N/A"}</td>
+              <td>${c.location || "N/A"}</td>
+              <td>${c.date || new Date().toLocaleDateString()}</td>
+            </tr>
+          `,
+          )
+          .join("");
+      }
+
+      // Load Orders Table
+      function loadOrders() {
+        const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+        const tbody = document.getElementById("orderTableBody");
+
+        if (orders.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="7" style="text-align:center;color:#999;">No orders yet</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = orders
+          .map((order) => {
+            const items = order.items || [];
+            const itemNames = items.map((i) => i.name || "Product").join(", ");
+            return `
+              <tr>
+                <td>#${order.id || "N/A"}</td>
+                <td>${order.customerName || order.name || "N/A"}</td>
+                <td>${order.phone || "N/A"}</td>
+                <td>${itemNames || "N/A"}</td>
+                <td>UGX ${Number(order.total || 0).toLocaleString()}</td>
+                <td><span class="order-status">${order.status || "Pending"}</span></td>
+                <td>${order.date || new Date().toLocaleDateString()}</td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      // Product Modal Functions
+      function openProductModal() {
+        document.getElementById("productModal").classList.add("active");
+        document.getElementById("modalTitle").textContent = "Add New Product";
+        document.getElementById("productForm").reset();
+        document.getElementById("productId").value = "";
+        document.getElementById("productImagePreview").innerHTML =
+          "<span>Tap to select image</span>";
+        document.getElementById("productImageBase64").value = "";
+      }
+
+      function closeProductModal() {
+        document.getElementById("productModal").classList.remove("active");
+      }
+
+      // Image preview
+      document
+        .getElementById("productImage")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              document.getElementById("productImagePreview").innerHTML =
+                '<img src="' + event.target.result + '">';
+              document.getElementById("productImageBase64").value =
+                event.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Save Product
+      document
+        .getElementById("productForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("productName").value;
+          const price = document.getElementById("productPrice").value;
+          const stock = document.getElementById("productStock").value;
+          const category = document.getElementById("productCategory").value;
+          const imageBase64 =
+            document.getElementById("productImageBase64").value;
+          const imageFile = document.getElementById("productImage").files[0];
+
+          let products = JSON.parse(
+            localStorage.getItem("adminProducts") || "[]",
+          );
+
+          const productId = document.getElementById("productId").value;
+
+          if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              saveProduct(
+                products,
+                productId,
+                name,
+                price,
+                category,
+                event.target.result,
+                stock,
+              );
+            };
+            reader.readAsDataURL(imageFile);
+          } else if (imageBase64) {
+            saveProduct(
+              products,
+              productId,
+              name,
+              price,
+              category,
+              imageBase64,
+              stock,
+            );
+          } else {
+            saveProduct(
+              products,
+              productId,
+              name,
+              price,
+              category,
+              "images/bag-placeholder.svg",
+              stock,
             );
           }
+        });
+
+      function saveProduct(
+        products,
+        productId,
+        name,
+        price,
+        category,
+        image,
+        stock,
+      ) {
+        if (productId) {
+          const index = products.findIndex((p) => p.id == productId);
+          if (index > -1) {
+            products[index] = {
+              ...products[index],
+              name,
+              price,
+              category,
+              image,
+              stock: parseInt(stock) || 0,
+            };
+          }
+        } else {
+          const newId =
+            products.length > 0
+              ? Math.max(...products.map((p) => p.id)) + 1
+              : 1;
+          products.push({
+            id: newId,
+            name,
+            price,
+            category,
+            image,
+            stock: parseInt(stock) || 1,
+          });
+        }
+
+        localStorage.setItem("adminProducts", JSON.stringify(products));
+        alert("Product saved successfully!");
+        closeProductModal();
+        loadProducts();
+        updateStats();
+      }
+
+      // Edit Product
+      function editProduct(id, name, price, category, image, stock) {
+        document.getElementById("productModal").classList.add("active");
+        document.getElementById("modalTitle").textContent = "Edit Product";
+        document.getElementById("productId").value = id;
+        document.getElementById("productName").value = name;
+        document.getElementById("productPrice").value = price;
+        document.getElementById("productStock").value = stock || 0;
+        document.getElementById("productCategory").value = category;
+        document.getElementById("productImageBase64").value = image || "";
+        if (image) {
+          document.getElementById("productImagePreview").innerHTML =
+            '<img src="' + image + '">';
+        } else {
+          document.getElementById("productImagePreview").innerHTML =
+            "<span>Tap to select image</span>";
         }
       }
 
-      // Initial load when page opens
-      loadInventory();
+      // Delete Product
+      function deleteProduct(id) {
+        if (confirm("Are you sure you want to delete this product?")) {
+          let products = JSON.parse(
+            localStorage.getItem("adminProducts") || "[]",
+          );
+          products = products.filter((p) => p.id != id);
+          localStorage.setItem("adminProducts", JSON.stringify(products));
+          alert("Product deleted!");
+          loadProducts();
+          updateStats();
+        }
+      }
+
+      // Quick action function
+      function showTab(tabId) {
+        alert("This section is coming soon!");
+      }
     </script>
   </body>
 </html>

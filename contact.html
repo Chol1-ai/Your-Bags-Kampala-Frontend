@@ -1,63 +1,249 @@
-<!-- FontAwesome for Social Media Icons -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-/>
-<link rel="stylesheet" href="css/base.css" />
-<link rel="stylesheet" href="css/contact.css" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Your Bags Kampala</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="logo-container">
+        <img
+          src="images/Logo.jpeg"
+          alt="Logo"
+          class="logo-img"
+          onerror="this.src = 'https://via.placeholder.com/45?text=YB'"
+        />
+        <div class="brand">
+          <h1>Your Bags Kampala</h1>
+        </div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://wa.me/256764266189" class="cta-wa">WhatsApp</a>
+      </nav>
+    </header>
 
-<section class="contact-grid">
-  <!-- Left Side: The Form -->
-  <div class="contact-form">
-    <h2>Message Us</h2>
-    <p style="margin-bottom: 20px; color: gray">
-      Fill in the details below and we will get back to you.
-    </p>
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+      <h1>Contact Us</h1>
+    </section>
 
-    <form action="#">
-      <input type="text" placeholder="Your Name" required />
-      <input type="text" placeholder="Subject / Bag Name" required />
-      <textarea placeholder="How can we help you?" rows="5" required></textarea>
+    <!-- Contact Form -->
+    <section class="contact-container">
+      <div class="contact-form">
+        <h2>Send us a Message</h2>
+        <p style="margin-bottom: 20px; color: gray">
+          Fill in the details below and we will get back to you.
+        </p>
+        <form id="contactForm" onsubmit="return validateContactForm();">
+          <input type="text" id="clientName" placeholder="Your Name" required />
+          <input
+            type="email"
+            id="clientEmail"
+            placeholder="Your Email"
+            required
+          />
+          <input
+            type="tel"
+            id="clientPhone"
+            placeholder="Phone (2567xxxxxxx)"
+            required
+            pattern="[0-9]{10,12}"
+          />
+          <input
+            type="text"
+            id="subject"
+            placeholder="Subject / Bag Name"
+            required
+          />
+          <textarea
+            id="message"
+            placeholder="How can we help you?"
+            rows="5"
+            required
+          ></textarea>
+          <div class="send-options">
+            <button type="submit" class="submit-btn wa-btn">
+              <i class="fab fa-whatsapp"></i> Send via WhatsApp
+            </button>
+            <button
+              type="button"
+              class="submit-btn email-btn"
+              onclick="sendViaEmail()"
+            >
+              <i class="fas fa-envelope"></i> Send via Email
+            </button>
+          </div>
+        </form>
+        <div id="formSuccess" class="success-message" style="display: none">
+          <i class="fas fa-check-circle"></i>
+          <h3>Message Sent!</h3>
+          <p>We'll get back to you soon.</p>
+        </div>
+      </div>
 
-      <!-- THE MISSING BUTTON -->
-      <button type="submit" class="submit-btn">Submit Request</button>
-    </form>
-  </div>
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <p>Kampala, Uganda</p>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <p>+256 741 461 995</p>
+        </div>
+        <div class="info-item">
+          <i class="fab fa-whatsapp"></i>
+          <p>+256 764 266189</p>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <p>sales@yourbagskampala.com</p>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <p>Mon - Sat (8AM - 7PM)</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Right Side: Location Info -->
-  <div class="info-card">
-    <h3>Location</h3>
-    <p>📍 Kampala, Uganda</p>
-    <p>💬 WhatsApp: +256 764 266189</p>
-    <p>📞 TEL: +256 741 461 995</p>
-    <br />
-    <p><strong>Available:</strong> Mon - Sat (8AM - 7PM)</p>
-  </div>
-</section>
-<section class="collection reveal">
-  <!-- Your collection code -->
-</section>
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-col">
+        <h3>YOUR BAGS KAMPALA</h3>
+        <p style="margin-top: 15px; color: #ccc">Kampala's #1 Bag Store.</p>
+        <div class="social-links" style="margin-top: 20px">
+          <a href="https://instagram.com/yourbagskampala" target="_blank"
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+          <a
+            href="https://www.tiktok.com/@your.bags.kampala?_r=1&_t=ZM-93C9NJ8Nutn"
+            target="_blank"
+            ><i class="fab fa-tiktok"></i> TikTok</a
+          >
+          <a href="https://wa.me/256764266189" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="shop.html" class="footer-link">Shop</a>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p style="color: #ccc; margin-bottom: 10px">📍 Kampala, Uganda</p>
+        <p style="color: #ccc; margin-bottom: 10px">📞 +256 741 461 995</p>
+        <a
+          href="https://wa.me/256764266189"
+          class="cta-wa"
+          style="display: inline-block; margin-top: 10px"
+          >Chat on WhatsApp</a
+        >
+      </div>
+    </footer>
 
-<section class="order-steps reveal">
-  <!-- Your order steps code -->
-</section>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/256764266189" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
 
-<!-- Mobile Bottom Navigation -->
-<div class="mobile-bottom-nav">
-  <a href="index.html">
-    <i class="fa fa-home"></i>
-    <span>Home</span>
-  </a>
-  <a href="shop.html">
-    <i class="fa fa-shopping-bag"></i>
-    <span>Shop</span>
-  </a>
-  <a href="contact.html">
-    <i class="fa fa-envelope"></i>
-    <span>Contact</span>
-  </a>
-  <a href="https://wa.me/256764266189">
-    <i class="fab fa-whatsapp"></i>
-    <span>Order</span>
-  </a>
-</div>
+    <!-- JavaScript for WhatsApp and Email -->
+    <script>
+      const phoneNumber = "256764266189";
+      const email = "sales@yourbagskampala.com";
+
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("clientName").value;
+          const subject = document.getElementById("subject").value;
+          const message = document.getElementById("message").value;
+
+          const fullMessage = `*New Message from Your Bags Kampala*\n\n*Name:* ${name}\n*Subject:* ${subject}\n\n*Message:* ${message}`;
+
+          const encodedMessage = encodeURIComponent(fullMessage);
+          window.open(
+            `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+            "_blank",
+          );
+        });
+
+      function sendViaEmail() {
+        const name = document.getElementById("clientName").value;
+        const email = document.getElementById("clientEmail").value;
+        const phone = document.getElementById("clientPhone").value;
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
+
+        if (!name || !email || !phone || !subject || !message) {
+          alert("Please fill in all fields");
+          return;
+        }
+
+        const emailSubject = encodeURIComponent(subject);
+        const emailBody = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nSubject: ${subject}\n\nMessage:\n${message}`,
+        );
+
+        window.location.href = `mailto:sales@yourbagskampala.com?subject=${emailSubject}&body=${emailBody}`;
+      }
+
+      function validateContactForm() {
+        const name = document.getElementById("clientName").value;
+        const email = document.getElementById("clientEmail").value;
+        const phone = document.getElementById("clientPhone").value;
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
+
+        if (!name || !email || !phone || !subject || !message) {
+          alert("Please fill in all fields");
+          return false;
+        }
+
+        // Show success message
+        document.getElementById("contactForm").style.display = "none";
+        document.getElementById("formSuccess").style.display = "block";
+
+        return false; // Prevent actual form submission
+      }
+    </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav">
+      <a href="index.html">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="shop.html">
+        <i class="fas fa-shopping-bag"></i>
+        <span>Shop</span>
+      </a>
+      <a href="about.html">
+        <i class="fas fa-info-circle"></i>
+        <span>About</span>
+      </a>
+      <a href="contact.html">
+        <i class="fas fa-envelope"></i>
+        <span>Contact</span>
+      </a>
+    </div>
+  </body>
+</html>

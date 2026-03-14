@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Wishlist | Your Bags Kampala</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/shop.css" />
+    <style>
+      .wishlist-container {
+        padding: 40px 8%;
+        min-height: 60vh;
+      }
+      .wishlist-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+      .wishlist-item {
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .wishlist-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .remove-wishlist {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .empty-wishlist {
+        text-align: center;
+        padding: 60px;
+      }
+      .empty-wishlist i {
+        font-size: 60px;
+        color: #ddd;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <a href="index.html" class="logo-container">
+        <img src="images/Logo.jpeg" alt="Logo" class="logo-img" />
+        <div class="brand"><h1>Your Bags Kampala</h1></div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://wa.me/256764266189" class="cta-wa">WhatsApp</a>
+      </nav>
+    </header>
+
+    <div class="wishlist-container">
+      <h1 style="text-align: center; color: var(--primary)">My Wishlist</h1>
+      <p style="text-align: center; color: #666; margin-top: 10px">
+        Items you've saved for later
+      </p>
+
+      <div id="wishlist-items" class="wishlist-grid">
+        <!-- Wishlist items will appear here -->
+      </div>
+
+      <div id="empty-message" class="empty-wishlist" style="display: none">
+        <i class="far fa-heart"></i>
+        <h2>Your wishlist is empty</h2>
+        <p>Browse our shop and add items you love!</p>
+        <a
+          href="shop.html"
+          class="cta-wa"
+          style="display: inline-block; margin-top: 20px"
+          >Browse Shop</a
+        >
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-col">
+        <h3>YOUR BAGS KAMPALA</h3>
+        <p style="margin-top: 15px; color: #ccc">Kampala's #1 Bag Store.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="admin.html" class="footer-link">Admin Dashboard</a>
+        <a href="shop.html" class="footer-link">Shop</a>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p style="color: #ccc; margin-bottom: 10px">📍 Kampala, Uganda</p>
+        <p style="color: #ccc; margin-bottom: 10px">📞 +256 741 461 995</p>
+        <a href="https://wa.me/256764266189" class="cta-wa">Chat on WhatsApp</a>
+      </div>
+    </footer>
+
+    <a href="https://wa.me/256764266189" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="mobile-bottom-nav">
+      <a href="index.html"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="shop.html"
+        ><i class="fas fa-shopping-bag"></i><span>Shop</span></a
+      >
+      <a href="about.html"
+        ><i class="fas fa-info-circle"></i><span>About</span></a
+      >
+      <a href="contact.html"
+        ><i class="fas fa-envelope"></i><span>Contact</span></a
+      >
+    </div>
+
+    <script>
+      // Get wishlist from localStorage
+      function getWishlist() {
+        const wishlist = localStorage.getItem("wishlist");
+        return wishlist ? JSON.parse(wishlist) : [];
+      }
+
+      // Remove from wishlist
+      function removeFromWishlist(id) {
+        let wishlist = getWishlist();
+        wishlist = wishlist.filter((item) => item.id !== id);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        renderWishlist();
+      }
+
+      // Render wishlist items
+      async function renderWishlist() {
+        const container = document.getElementById("wishlist-items");
+        const emptyMsg = document.getElementById("empty-message");
+        const wishlist = getWishlist();
+
+        if (wishlist.length === 0) {
+          container.style.display = "none";
+          emptyMsg.style.display = "block";
+          return;
+        }
+
+        container.style.display = "grid";
+        emptyMsg.style.display = "none";
+
+        // Try to get product details from API or use saved data
+        let products = [];
+
+        // First check localStorage for admin-added products
+        const adminProducts = localStorage.getItem("adminProducts");
+        if (adminProducts) {
+          products = JSON.parse(adminProducts);
+        }
+
+        // If no local products, try API
+        if (products.length === 0) {
+          try {
+            const res = await fetch("/api/products");
+            if (res.ok) {
+              products = await res.json();
+            }
+          } catch (e) {
+            // Try local JSON
+            try {
+              const res = await fetch("products.json");
+              products = await res.json();
+            } catch (err) {}
+          }
+        }
+
+        container.innerHTML = wishlist
+          .map((item) => {
+            const product = products.find(
+              (p) => p._id === item.id || p.name === item.name,
+            );
+            const name = item.name || (product ? product.name : "Product");
+            const price = item.price || (product ? product.price : 0);
+            const image =
+              item.image ||
+              (product ? product.image : "images/bag-placeholder.svg");
+
+            return `
+            <div class="wishlist-item">
+              <img src="${image}" alt="${name}" onerror="this.src='images/bag-placeholder.svg'" />
+              <h3>${name}</h3>
+              <p style="color: var(--accent); font-weight: bold; font-size: 1.2rem;">UGX ${Number(price).toLocaleString()}</p>
+              <a href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20${encodeURIComponent(name)}" target="_blank" class="cta-wa" style="display:inline-block; margin-top:10px;">Order Now</a>
+              <br>
+              <button class="remove-wishlist" onclick="removeFromWishlist('${item.id}')">Remove</button>
+            </div>
+          `;
+          })
+          .join("");
+      }
+
+      // Initial render
+      renderWishlist();
+    </script>
+  </body>
+</html>

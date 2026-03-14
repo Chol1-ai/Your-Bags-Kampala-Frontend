@@ -1,91 +1,166 @@
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  padding: 40px 5%;
-}
-.contact-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-}
-.contact-form button {
-  background:green;
-  color: black;
-  padding: 12px 25px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.info-card {
-  background: #f4f4f4;
-  padding: 25px;
-  border-left: 4px solid var(--abanista-orange);
+/* Contact Hero */
+.contact-hero {
+  background:
+    linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85)),
+    url("../images/Kampala.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 80px 8%;
+  text-align: center;
 }
 
-/* Container Layout */
-.contact-grid {
+.contact-hero h1 {
+  font-size: 3rem;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Contact Form */
+.contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
   padding: 60px 8%;
-  align-items: start;
+  background: var(--background);
 }
 
-/* Form Styling */
-.contact-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.contact-form {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+  color: var(--primary);
+  margin-bottom: 20px;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
   padding: 15px;
-  border: 1px solid #0a0000;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  font-size: 14px;
-  outline: none;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: var(--purple);
-}
-
-/* THE BUTTON STYLING */
-.submit-btn {
-  background-color: var(--purple);
-  color: white;
-  padding: 16px 30px;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
   font-size: 16px;
+}
+
+.contact-form textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.contact-form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
-  width: fit-content; /* Makes button size match the text */
+  width: 100%;
 }
 
-.submit-btn:hover {
-  background-color: #6a11cb;
-  transform: translateY(-2px);
+.contact-form button:hover {
+  background: #d35400;
 }
 
-/* Info Card (Right Side) */
-.info-card {
-  background: #f9f9f9;
+/* Send Options */
+.send-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.send-options .submit-btn {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 14px;
+}
+
+.wa-btn {
+  background: #25d366 !important;
+}
+
+.wa-btn:hover {
+  background: #20bd5a !important;
+}
+
+.email-btn {
+  background: var(--primary) !important;
+}
+
+.email-btn:hover {
+  background: #333 !important;
+}
+
+/* Success Message */
+.success-message {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f0f9f0;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+.success-message i {
+  font-size: 60px;
+  color: #22c55e;
+  margin-bottom: 15px;
+}
+
+.success-message h3 {
+  color: #22c55e;
+  margin-bottom: 10px;
+}
+
+.success-message p {
+  color: #666;
+}
+
+/* Contact Info */
+.contact-info {
   padding: 40px;
-  border-radius: 20px;
-  line-height: 2;
 }
 
-/* Mobile Responsive */
+.contact-info h2 {
+  color: var(--primary);
+  margin-bottom: 30px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.info-item i {
+  width: 50px;
+  height: 50px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.info-item p {
+  color: #555;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .contact-grid {
+  .contact-container {
     grid-template-columns: 1fr;
     padding: 40px 5%;
+  }
+
+  .contact-hero h1 {
+    font-size: 2rem;
   }
 }

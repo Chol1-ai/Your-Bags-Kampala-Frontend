@@ -3,210 +3,801 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Bags Kampala | Home</title>
-    <!-- FontAwesome for Social Media Icons -->
+    <title>Your Bags Kampala | Premium Bags in Uganda</title>
+    <!-- FontAwesome for Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/index.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
   </head>
   <body>
+    <!-- HEADER -->
     <header>
       <a href="index.html" class="logo-container">
         <img
-          width="50"
-          height="60"
-          src="Logo.jpeg"
+          src="images/Logo.jpeg"
           alt="Logo"
           class="logo-img"
           onerror="this.src = 'https://via.placeholder.com/45?text=YB'"
         />
         <div class="brand">
           <h1>Your Bags Kampala</h1>
-          <p>your daily dose of bag goals</p>
         </div>
       </a>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for a bag..."
+          onkeyup="searchBags()"
+        />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+
       <nav>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="shop.html">Products</a>
-        <a
-          href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!"
-          target="_blank"
-          class="cta-wa"
-          >WhatsApp</a
-        >
+        <a href="admin.html"><i class="fas fa-user-cog"></i> Admin</a>
+        <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
+        <a href="shop.html"><i class="fas fa-shopping-bag"></i> Bag (0)</a>
       </nav>
     </header>
 
+    <!-- Search Results -->
+    <div id="searchResults" class="search-results"></div>
+
+    <!-- HERO SECTION -->
     <section class="hero">
       <div class="hero-text">
-        <h1>Elevate Your Style with Premium Bags</h1>
-        <p>Kampala's finest collection of handbags and more.</p>
-        <div class="hero-btns">
-          <a href="shop.html" class="cta-wa">Browse Products</a>
-          <a href="https://wa.me/256764266189" class="btn-cream"
-            >Shop via WhatsApp</a
-          >
-        </div>
-      </div>
-      <div class="hero-img">
-        <img width="100" height="500" src="Kampala.jpg" alt="Bag Collection" />
+        <h1>CARRY YOUR AMBITION.</h1>
+        <p>
+          Premium Laptop, Travel, and Handbags delivered to your door in
+          Kampala.
+        </p>
+        <a href="shop.html" class="cta-btn">SHOP NEW ARRIVALS</a>
       </div>
     </section>
 
-    <section class="collection">
-      <h2>Our Collection</h2>
-      <div class="col-grid">
-        <div
-          class="cat-card"
-          onclick="location.href = 'shop.html?cat=handbags'"
+    <!-- Shopping Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar">
+      <div class="cart-header">
+        <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+        <button onclick="closeCart()" class="close-cart">&times;</button>
+      </div>
+      <div id="cartItems" class="cart-items">
+        <p class="empty-cart">Your cart is empty</p>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotalAmount">UGX 0</span>
+        </div>
+        <button onclick="checkoutViaWhatsApp()" class="checkout-btn">
+          <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
+        </button>
+        <button
+          onclick="openCheckoutForm()"
+          class="checkout-btn"
+          style="
+            margin-top: 10px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          "
         >
-          <h4>Handbags</h4>
-        </div>
-        <div
-          class="cat-card"
-          onclick="location.href = 'shop.html?cat=Shoulder%20Bags'"
-        >
-          <h4>Shoulder Bags</h4>
-        </div>
-        <div class="cat-card" onclick="location.href = 'shop.html?cat=Tote%20Bags'">
-          <h4>Tote Bags</h4>
-        </div>
-        <div class="cat-card" onclick="location.href = 'shop.html?cat=Laptop%20Bags'">
-          <h4>Laptop Bags</h4>
-        </div>
-        <div class="cat-card" onclick="location.href = 'shop.html?cat=Clutch%20Bags'">
-          <h4>Clutch Bags</h4>
-        </div>
-        <div class="cat-card" onclick="location.href = 'shop.html?cat=Min%20Bags'">
-          <h4>Min Bags</h4>
-        </div>
-        <div class="cat-card" onclick="location.href = 'shop.html?cat=Backpack%20Bags'">
-          <h4>Backpack Bags</h4>
-        </div>
-        <div class="cat-card" onclick="location.href = 'shop.html?cat=Travel%20Bags'">
-          <h4>Travel Bags</h4>
-        </div>
+          <i class="fas fa-credit-card"></i> Pay with Card
+        </button>
       </div>
-    </section>
-
-    <section class="sample-products">
-      <h2>Sample Bags by Category</h2>
-      <p>You can replace these images and prices anytime from Admin.</p>
-      <div class="sample-grid">
-        <a class="sample-card" href="shop.html?cat=handbags">
-          <img src="images/1768930566601-pink-color-luggage-baggage-bag-use-transportation-travel.jpg" alt="Handbag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Classic Everyday Handbag</h4>
-          <p>UGX 95,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Shoulder%20Bags">
-          <img src="images/1768919993374-WhatsApp Image 2026-01-13 at 16.49.28.jpeg" alt="Shoulder Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>City Shoulder Tote</h4>
-          <p>UGX 120,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Tote%20Bags">
-          <img src="images/1768929262643-red-luggage-yellow-background-isolated.jpg" alt="Tote Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Daily Carry Tote</h4>
-          <p>UGX 110,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Laptop%20Bags">
-          <img src="images/1768930610142-backpack-school-hallway.jpg" alt="Laptop Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Pro Laptop Carrier</h4>
-          <p>UGX 145,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Clutch%20Bags">
-          <img src="images/1768919993374-WhatsApp Image 2026-01-13 at 16.49.28.jpeg" alt="Clutch Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Evening Clutch Shine</h4>
-          <p>UGX 80,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Min%20Bags">
-          <img src="images/1768930566601-pink-color-luggage-baggage-bag-use-transportation-travel.jpg" alt="Mini Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Mini Chic Pouch</h4>
-          <p>UGX 60,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Backpack%20Bags">
-          <img src="images/1768930610142-backpack-school-hallway.jpg" alt="Backpack Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Campus Backpack Pro</h4>
-          <p>UGX 130,000</p>
-        </a>
-        <a class="sample-card" href="shop.html?cat=Travel%20Bags">
-          <img src="images/1768940659874-travel-bags-ready-trip.jpg" alt="Travel Bag Sample" onerror="this.onerror=null;this.src='images/bag-placeholder.svg'" />
-          <h4>Weekend Travel Duffel</h4>
-          <p>UGX 180,000</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="collection reveal">
-      <!-- Your collection code -->
-    </section>
-
-    <section class="order-steps reveal">
-      <!-- Your order steps code -->
-    </section>
-
-    <footer>
-    <div>
-        <!-- Logo and Name Container -->
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-            <img src="Logo.jpeg" 
-                 alt="Logo" 
-                 class="logo-img-footer" 
-                 onerror="this.src='https://via.placeholder.com/40'">
-            <h4 >YOUR BAGS KAMPALA</h4>
-        </div>
-                <h6>your daily dose of bag goals</h6>
     </div>
 
-    <!-- Rest of your footer columns (Quick Links, Follow Us, etc.) -->
-    
-      <div>
-        <h4>Quick Links</h4>
-        <a href="shop.html" class="footer-link">Products</a>
-        <a href="contact.html" class="footer-link">Contact Us</a>
-        <a href="admin.html" class="footer-link">Admin Login</a>
-      </div>
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
 
-      <div>
-        <h4>Follow Us</h4>
-        <div class="social-links">
-          <a href="https://www.tiktok.com/@your.bags.kampala?_r=1&_t=ZM-93C9NJ8Nutn" target="_blank"
-            ><i class="fab fa-tiktok"></i> TikTok</a
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal" style="display: none">
+      <div
+        style="
+          background: white;
+          padding: 30px;
+          border-radius: 20px;
+          width: 90%;
+          max-width: 450px;
+          max-height: 90vh;
+          overflow-y: auto;
+        "
+      >
+        <h2 style="margin-top: 0; color: #333">
+          <i class="fas fa-credit-card"></i> Checkout
+        </h2>
+        <p style="color: #666; margin-bottom: 20px">
+          Fill in your details to complete the order
+        </p>
+
+        <form id="checkoutForm" onsubmit="processPayment(event)">
+          <h4 style="margin: 15px 0 10px; color: #333">Delivery Information</h4>
+          <input
+            type="text"
+            id="deliveryName"
+            placeholder="Full Name"
+            required
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 10px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              box-sizing: border-box;
+            "
+          />
+          <input
+            type="tel"
+            id="deliveryPhone"
+            placeholder="Phone Number (e.g., 2567xxxxxxx)"
+            required
+            pattern="[0-9]{10,12}"
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 10px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              box-sizing: border-box;
+            "
+          />
+          <input
+            type="email"
+            id="deliveryEmail"
+            placeholder="Email (optional)"
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 10px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              box-sizing: border-box;
+            "
+          />
+          <input
+            type="text"
+            id="deliveryAddress"
+            placeholder="Delivery Address"
+            required
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 10px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              box-sizing: border-box;
+            "
+          />
+
+          <h4 style="margin: 15px 0 10px; color: #333">Payment Information</h4>
+          <select
+            id="paymentMethod"
+            required
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 10px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              box-sizing: border-box;
+            "
           >
-          <a href="https://www.instagram.com/yourusername" target="_blank"
-            ><i class="fab fa-instagram"></i> Instagram</a
+            <option value="">Select Payment Method</option>
+            <option value="mobilemoney">Mobile Money (MTN/Airtel)</option>
+            <option value="cash">Cash on Delivery</option>
+            <option value="card">Credit/Debit Card</option>
+          </select>
+
+          <div id="cardDetails" style="display: none">
+            <input
+              type="text"
+              id="cardNumber"
+              placeholder="Card Number (1234 5678 9012 3456)"
+              style="
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-sizing: border-box;
+              "
+            />
+            <div style="display: flex; gap: 10px">
+              <input
+                type="text"
+                id="cardExpiry"
+                placeholder="MM/YY"
+                style="
+                  flex: 1;
+                  padding: 12px;
+                  margin-bottom: 10px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                "
+              />
+              <input
+                type="text"
+                id="cardCVV"
+                placeholder="CVV"
+                style="
+                  flex: 1;
+                  padding: 12px;
+                  margin-bottom: 10px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                "
+              />
+            </div>
+          </div>
+
+          <div
+            style="
+              background: #f9f9f9;
+              padding: 15px;
+              border-radius: 10px;
+              margin: 15px 0;
+            "
           >
-          <a href="https://twitter.com/yourusername" target="_blank"
-            ><i class="fab fa-twitter"></i> Twitter</a
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                font-weight: bold;
+              "
+            >
+              <span>Total:</span>
+              <span id="checkoutTotal" style="color: #6366f1">UGX 0</span>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            style="
+              width: 100%;
+              padding: 15px;
+              background: linear-gradient(135deg, #6366f1, #8b5cf6);
+              color: white;
+              border: none;
+              border-radius: 10px;
+              font-size: 16px;
+              font-weight: bold;
+              cursor: pointer;
+            "
+          >
+            Complete Order
+          </button>
+          <button
+            type="button"
+            onclick="closeCheckoutForm()"
+            style="
+              width: 100%;
+              padding: 15px;
+              background: #eee;
+              color: #333;
+              border: none;
+              border-radius: 10px;
+              font-size: 16px;
+              margin-top: 10px;
+              cursor: pointer;
+            "
+          >
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- CATEGORY GRID -->
+    <section class="category-section">
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="category-grid">
+        <a href="shop.html?cat=handbags" class="category-card">
+          <div class="category-icon">
+            <i class="fas fa-handbag"></i>
+          </div>
+          <h3>Handbags</h3>
+        </a>
+        <a href="shop.html?cat=Tote Bags" class="category-card">
+          <div class="category-icon">
+            <i class="fas fa-shopping-basket"></i>
+          </div>
+          <h3>Tote Bags</h3>
+        </a>
+        <a href="shop.html?cat=Laptop Bags" class="category-card">
+          <div class="category-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3>Laptop Bags</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+      <h2 class="section-title">About Us</h2>
+      <div class="about-content">
+        <p>
+          Founded in the heart of Kampala, YOUR BAGS KAMPALA provides the
+          durability and style you need for the modern Ugandan lifestyle. From
+          the boardroom to the bus park, we've got your back.
+        </p>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="featured-section">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="featured-grid">
+        <div class="featured-card">
+          <span class="sale-tag">BESTSELLER</span>
+          <img
+            src="images/backpack-001.jpg"
+            alt="Executive Leather Laptop Bag"
+            onerror="this.src = 'images/bag-placeholder.svg'"
+          />
+          <h4>Executive Leather Laptop Bag</h4>
+          <p class="price">UGX 120,000</p>
+          <a
+            href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20Executive%20Leather%20Laptop%20Bag"
+            target="_blank"
+            class="cta-btn"
+            style="
+              background: #6366f1;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 20px;
+              text-decoration: none;
+              display: inline-block;
+              margin-top: 10px;
+            "
+            >Order via WhatsApp</a
+          >
+        </div>
+        <div class="featured-card">
+          <span class="sale-tag">NEW</span>
+          <img
+            src="images/travel-bag-001.jpg"
+            alt="Waterproof Travel Duffel"
+            onerror="this.src = 'images/bag-placeholder.svg'"
+          />
+          <h4>Waterproof Travel Duffel</h4>
+          <p class="price">UGX 85,000</p>
+          <a
+            href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20Waterproof%20Travel%20Duffel"
+            target="_blank"
+            class="cta-btn"
+            style="
+              background: #6366f1;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 20px;
+              text-decoration: none;
+              display: inline-block;
+              margin-top: 10px;
+            "
+            >Order via WhatsApp</a
+          >
+        </div>
+        <div class="featured-card">
+          <img
+            src="images/tote-bag-001.jpg"
+            alt="Classic Ladies Tote"
+            onerror="this.src = 'images/bag-placeholder.svg'"
+          />
+          <h4>Classic Ladies Tote</h4>
+          <p class="price">UGX 95,000</p>
+          <a
+            href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20Classic%20Ladies%20Tote"
+            target="_blank"
+            class="cta-btn"
+            style="
+              background: #6366f1;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 20px;
+              text-decoration: none;
+              display: inline-block;
+              margin-top: 10px;
+            "
+            >Order via WhatsApp</a
+          >
+        </div>
+        <div class="featured-card">
+          <span class="sale-tag">SALE</span>
+          <img
+            src="images/handbag-001.jpeg"
+            alt="Elegant Handbag"
+            onerror="this.src = 'images/bag-placeholder.svg'"
+          />
+          <h4>Elegant Handbag</h4>
+          <p class="price">UGX 75,000</p>
+          <a
+            href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20Elegant%20Handbag"
+            target="_blank"
+            class="cta-btn"
+            style="
+              background: #6366f1;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 20px;
+              text-decoration: none;
+              display: inline-block;
+              margin-top: 10px;
+            "
+            >Order via WhatsApp</a
           >
         </div>
       </div>
+    </section>
 
-      <div>
-        <h4>Contact</h4>
-        <p>📞 +256 764 266 189</p>
-        <p>📞 +256 741 461 995</p>
-        <p>📍 Kampala, Uganda</p>
+    <!-- WHY CHOOSE US -->
+    <section class="why-choose-section">
+      <h2>Why Choose Your Bags Kampala?</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <i class="fas fa-shipping-fast"></i>
+          <h3>Islandwide Delivery</h3>
+          <p>Fast delivery to all parts of Kampala and beyond</p>
+        </div>
+        <div class="why-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Premium Quality</h3>
+          <p>Every bag is hand-selected for perfect stitching</p>
+        </div>
+        <div class="why-card">
+          <i class="fas fa-undo"></i>
+          <h3>Easy Returns</h3>
+          <p>Not satisfied? Return within 7 days</p>
+        </div>
+        <div class="why-card">
+          <i class="fas fa-lock"></i>
+          <h3>Secure Payments</h3>
+          <p>Pay with Mobile Money or cash on delivery</p>
+        </div>
       </div>
+    </section>
 
-      
-        </form>
+    <!-- SHIPPING INFO -->
+    <section class="shipping-section">
+      <div class="shipping-grid">
+        <div class="shipping-item">
+          <i class="fas fa-rocket"></i>
+          <h4>🚀 Fast Delivery</h4>
+          <p>Same-day in Kampala CBD</p>
+        </div>
+        <div class="shipping-item">
+          <i class="fas fa-shield-alt"></i>
+          <h4>🛡️ 48hr Returns</h4>
+          <p>Easy exchange policy</p>
+        </div>
+        <div class="shipping-item">
+          <i class="fas fa-mobile-alt"></i>
+          <h4>💳 Mobile Money</h4>
+          <p>MTN & Airtel accepted</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-col">
+        <h3>YOUR BAGS KAMPALA</h3>
+        <p style="margin-top: 15px; color: #ccc">Kampala's #1 Bag Store.</p>
+        <div class="social-links" style="margin-top: 20px">
+          <a href="https://instagram.com/yourbagskampala" target="_blank"
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+          <a
+            href="https://www.tiktok.com/@your.bags.kampala?_r=1&_t=ZM-93C9NJ8Nutn"
+            target="_blank"
+            ><i class="fab fa-tiktok"></i> TikTok</a
+          >
+          <a href="https://wa.me/256764266189" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="admin.html" class="footer-link">Admin Dashboard</a>
+        <a href="shop.html" class="footer-link">Shop</a>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p style="color: #ccc; margin-bottom: 10px">📍 Kampala, Uganda</p>
+        <p style="color: #ccc; margin-bottom: 10px">📞 +256 741 461 995</p>
+        <p style="color: #ccc; margin-bottom: 10px">
+          📧 sales@yourbagskampala.com
+        </p>
+        <a
+          href="https://wa.me/256764266189"
+          class="cta-wa"
+          style="display: inline-block; margin-top: 10px"
+          >Chat on WhatsApp</a
+        >
       </div>
     </footer>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/256764266189" class="whatsapp-float" target="_blank">
       <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav">
+      <a href="index.html">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="shop.html">
+        <i class="fas fa-shopping-bag"></i>
+        <span>Shop</span>
+      </a>
+      <a href="about.html">
+        <i class="fas fa-info-circle"></i>
+        <span>About</span>
+      </a>
+      <a href="contact.html">
+        <i class="fas fa-envelope"></i>
+        <span>Contact</span>
+      </a>
+    </div>
+
+    <script>
+      // Cart functionality
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      function updateCartCount() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        document.querySelectorAll('a[href="shop.html"]').forEach((el) => {
+          el.innerHTML = el.innerHTML.replace(/\(.*\)/, `(${count})`);
+        });
+      }
+
+      function addToCart(product) {
+        const existing = cart.find((item) => item.id === product.id);
+        if (existing) {
+          existing.qty++;
+        } else {
+          cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            qty: 1,
+          });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        openCart();
+      }
+
+      function openCart() {
+        document.getElementById("cartSidebar").classList.add("active");
+        document.getElementById("cartOverlay").classList.add("active");
+        renderCartItems();
+      }
+
+      function closeCart() {
+        document.getElementById("cartSidebar").classList.remove("active");
+        document.getElementById("cartOverlay").classList.remove("active");
+      }
+
+      function renderCartItems() {
+        const container = document.getElementById("cartItems");
+        if (cart.length === 0) {
+          container.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+          document.getElementById("cartTotalAmount").textContent = "UGX 0";
+          return;
+        }
+
+        let html = "";
+        let total = 0;
+        cart.forEach((item, index) => {
+          const itemTotal = item.price * item.qty;
+          total += itemTotal;
+          html += `
+            <div class="cart-item">
+              <img src="${item.image || "images/bag-placeholder.svg"}" alt="${item.name}" />
+              <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p class="price">UGX ${item.price.toLocaleString()}</p>
+                <div class="cart-item-qty">
+                  <button onclick="changeQty(${index}, -1)">-</button>
+                  <span>${item.qty}</span>
+                  <button onclick="changeQty(${index}, 1)">+</button>
+                  <button class="remove-item" onclick="removeFromCart(${index})"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+        document.getElementById("cartTotalAmount").textContent =
+          "UGX " + total.toLocaleString();
+      }
+
+      function changeQty(index, delta) {
+        cart[index].qty += delta;
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        renderCartItems();
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        renderCartItems();
+      }
+
+      function checkoutViaWhatsApp() {
+        if (cart.length === 0) return;
+        let message = "*New Order from Your Bags Kampala*%0A%0A";
+        let total = 0;
+        cart.forEach((item) => {
+          message += `• ${item.name} x${item.qty} = UGX ${(item.price * item.qty).toLocaleString()}%0A`;
+          total += item.price * item.qty;
+        });
+        message += `%0A*Total: UGX ${total.toLocaleString()}*%0A%0APlease confirm my order.`;
+        window.open(`https://wa.me/256764266189?text=${message}`, "_blank");
+      }
+
+      function openCheckoutForm() {
+        if (cart.length === 0) return;
+        let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        document.getElementById("checkoutTotal").textContent =
+          "UGX " + total.toLocaleString();
+        document.getElementById("checkoutModal").style.display = "flex";
+        document.getElementById("cartOverlay").style.display = "block";
+      }
+
+      function closeCheckoutForm() {
+        document.getElementById("checkoutModal").style.display = "none";
+        document.getElementById("cartOverlay").style.display = "none";
+      }
+
+      document
+        .getElementById("paymentMethod")
+        .addEventListener("change", function () {
+          document.getElementById("cardDetails").style.display =
+            this.value === "card" ? "block" : "none";
+        });
+
+      function processPayment(e) {
+        e.preventDefault();
+        const name = document.getElementById("deliveryName").value;
+        const phone = document.getElementById("deliveryPhone").value;
+        const address = document.getElementById("deliveryAddress").value;
+        const payment = document.getElementById("paymentMethod").value;
+        let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+        let message = `*New Order - Payment: ${payment}*%0A%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}%0A%0A*Items:*%0A`;
+
+        // Save customer to localStorage
+        const customers = JSON.parse(localStorage.getItem("customers") || "[]");
+        const customerData = {
+          name,
+          phone,
+          email: document.getElementById("deliveryEmail")?.value || "",
+          location: address,
+          date: new Date().toLocaleDateString(),
+        };
+        // Add if not already exists
+        if (!customers.find((c) => c.phone === phone)) {
+          customers.push(customerData);
+          localStorage.setItem("customers", JSON.stringify(customers));
+        }
+
+        // Save order to localStorage
+        const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+        const orderData = {
+          id: Date.now(),
+          customerName: name,
+          phone,
+          address,
+          items: cart.map((item) => ({
+            name: item.name,
+            price: item.price,
+            qty: item.qty,
+          })),
+          total,
+          payment,
+          status: "Pending",
+          date: new Date().toLocaleDateString(),
+        };
+        orders.push(orderData);
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        cart.forEach((item) => {
+          message += `• ${item.name} x${item.qty} = UGX ${(item.price * item.qty).toLocaleString()}%0A`;
+        });
+        message += `%0A*Total: UGX ${total.toLocaleString()}*%0A%0ANew order received!`;
+
+        // Close forms and clear cart
+        closeCheckoutForm();
+        closeCart();
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+
+        // Send to WhatsApp
+        window.open(`https://wa.me/256764266189?text=${message}`, "_blank");
+        alert("Order placed successfully! We will contact you shortly.");
+      }
+
+      // Initialize cart count on page load
+      updateCartCount();
+
+      // Search functionality
+      async function searchBags() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        if (query.length < 2) {
+          document.getElementById("searchResults").classList.remove("active");
+          return;
+        }
+
+        // Get products from API or JSON
+        let products = [];
+
+        // First check localStorage for admin-added products
+        const adminProducts = localStorage.getItem("adminProducts");
+        if (adminProducts) {
+          products = JSON.parse(adminProducts);
+        }
+
+        // If no local products, try API
+        if (products.length === 0) {
+          try {
+            const res = await fetch("/api/products");
+            if (res.ok) products = await res.json();
+          } catch (e) {
+            try {
+              const res = await fetch("products.json");
+              products = await res.json();
+            } catch (err) {}
+          }
+        }
+
+        // Filter products
+        const results = products.filter(
+          (p) =>
+            p.name.toLowerCase().includes(query) ||
+            p.category.toLowerCase().includes(query),
+        );
+
+        const resultsContainer = document.getElementById("searchResults");
+        if (results.length > 0) {
+          resultsContainer.innerHTML = results
+            .map(
+              (p) => `
+            <div class="search-result-item" onclick="window.location.href='shop.html?search=${encodeURIComponent(p.name)}'">
+              <img src="${p.image || "images/bag-placeholder.svg"}" alt="${p.name}" />
+              <div>
+                <strong>${p.name}</strong>
+                <p>UGX ${Number(p.price).toLocaleString()}</p>
+              </div>
+            </div>
+          `,
+            )
+            .join("");
+          resultsContainer.classList.add("active");
+        } else {
+          resultsContainer.innerHTML =
+            '<p style="padding:15px;color:#666;">No bags found</p>';
+          resultsContainer.classList.add("active");
+        }
+      }
+    </script>
   </body>
 </html>

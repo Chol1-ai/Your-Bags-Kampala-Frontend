@@ -3,56 +3,56 @@
     "name": "Classic Everyday Handbag",
     "price": 95000,
     "category": "handbags",
-    "image": "images/1768930566601-pink-color-luggage-baggage-bag-use-transportation-travel.jpg",
+    "image": "handbag-067.jpg",
     "reviews": []
   },
   {
     "name": "City Shoulder Tote",
     "price": 120000,
     "category": "Shoulder Bags",
-    "image": "images/1768919993374-WhatsApp Image 2026-01-13 at 16.49.28.jpeg",
+    "image": "handbag-048.jpg",
     "reviews": []
   },
   {
     "name": "Daily Carry Tote",
     "price": 110000,
     "category": "Tote Bags",
-    "image": "images/1768929262643-red-luggage-yellow-background-isolated.jpg",
+    "image": "tote-bag-001.jpg",
     "reviews": []
   },
   {
     "name": "Pro Laptop Carrier",
     "price": 145000,
     "category": "Laptop Bags",
-    "image": "images/1768930610142-backpack-school-hallway.jpg",
+    "image": "backpack-001.jpg",
     "reviews": []
   },
   {
     "name": "Evening Clutch Shine",
     "price": 80000,
     "category": "Clutch Bags",
-    "image": "images/1768919993374-WhatsApp Image 2026-01-13 at 16.49.28.jpeg",
+    "image": "handbag-049.jpg",
     "reviews": []
   },
   {
     "name": "Mini Chic Pouch",
     "price": 60000,
     "category": "Min Bags",
-    "image": "images/1768930566601-pink-color-luggage-baggage-bag-use-transportation-travel.jpg",
+    "image": "handbag-050.jpg",
     "reviews": []
   },
   {
     "name": "Campus Backpack Pro",
     "price": 130000,
     "category": "Backpack Bags",
-    "image": "images/1768930610142-backpack-school-hallway.jpg",
+    "image": "backpack-001.jpg",
     "reviews": []
   },
   {
     "name": "Weekend Travel Duffel",
     "price": 180000,
     "category": "Travel Bags",
-    "image": "images/1768940659874-travel-bags-ready-trip.jpg",
+    "image": "travel-bag-001.jpg",
     "reviews": []
   }
 ]

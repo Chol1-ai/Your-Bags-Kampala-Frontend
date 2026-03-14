@@ -1,8 +1,11 @@
 :root {
-  --purple: #25d366;
+  --primary: #1a1a1a; /* Matte Black */
+  --accent: #6366f1; /* Purple/Blue Gradient */
+  --background: #f9f9f9; /* Soft Pearl Grey */
   --dark: #1a1c22;
   --cream: #fdfaf7;
   --text: #666;
+  --white: #ffffff;
 }
 
 * {
@@ -16,11 +19,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 8%;
-  background: rgba(65, 63, 63, 0.137);
+  padding: 12px 5%;
+  background: var(--primary);
   position: sticky;
   top: 0;
   z-index: 1000;
+  flex-wrap: nowrap;
+  gap: 15px;
 }
 
 .logo-img {
@@ -46,47 +51,75 @@ header {
   font-size: 22px;
   font-weight: 800;
   text-transform: uppercase;
+  color: var(--white);
 }
 .brand p {
   font-size: 12px;
   font-style: italic;
-  color: var(--text);
+  color: #ccc;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
 }
 
 nav a {
   text-decoration: none;
-  color: var(--dark);
-  margin-left: 25px;
+  color: #ffffff !important;
+  margin-left: 15px;
   font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
-.cta-wa {
-  background: var(--purple);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 12px;
-  text-decoration: none;
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent) !important;
+}
+
+nav a i {
+  color: #ffffff !important;
+  font-size: 16px;
 }
 
 footer {
   padding: 60px 8%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  border-top: 1px solid #22f00b;
+  border-top: 1px solid var(--accent);
+  background: var(--primary);
+  color: var(--white);
 }
+
+.footer-col h3 {
+  color: var(--white);
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
 /* Footer Link Styling */
 .footer-link {
   display: block;
   text-decoration: none;
-  color: #666;
+  color: #ccc;
   margin-bottom: 12px;
   font-size: 14px;
   transition: 0.3s;
 }
 
 .footer-link:hover {
-  color: var(--purple);
-  padding-left: 5px; /* Subtle move effect */
+  color: #6366f1;
+  padding-left: 5px;
 }
 
 /* Social Media Icon Styling */
@@ -107,18 +140,18 @@ footer {
 }
 
 .social-links a:hover {
-  color: var(--purple);
+  color: #6366f1;
 }
 
 /* Specific Brand Colors on Hover (Optional) */
 .social-links a:hover .fa-tiktok {
-  color: #000;
+  color: #6366f1;
 }
 .social-links a:hover .fa-instagram {
-  color: #e1306c;
+  color: #6366f1;
 }
 .social-links a:hover .fa-twitter {
-  color: #1da1f2;
+  color: #6366f1;
 }
 
 /* 1. Remove Underline from ALL links */
@@ -135,8 +168,8 @@ nav a {
 }
 
 nav a:hover {
-  color: blue;
-  text-decoration: none; /* Ensures underline doesn't come back on hover */
+  color: var(--accent); /* Burnt Orange on hover */
+  text-decoration: none;
 }
 
 /* 3. Floating WhatsApp Button */
@@ -152,14 +185,14 @@ nav a:hover {
   text-align: center;
   font-size: 24px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 10000; /* Stays on top of everything */
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .whatsapp-float:hover {
-  background-color: #128c7e;
+  background-color: #20bd5a;
   color: white;
 }
 
@@ -167,7 +200,7 @@ nav a:hover {
   display: flex;
   align-items: center;
   gap: 15px;
-  text-decoration: none !important; /* Forces underline away */
+  text-decoration: none !important;
 }
 
 .brand h1 {
@@ -179,6 +212,109 @@ nav a:hover {
 .brand p {
   margin: 0;
   font-size: 12px;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border-radius: 25px;
+  padding: 6px 12px;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  font-size: 13px;
+  background: transparent;
+  color: var(--primary);
+  width: 120px;
+}
+
+.search-bar input::placeholder {
+  color: #999;
+}
+
+.search-bar button {
+  background: var(--accent);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Search Results */
+.search-results {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: none;
+  pointer-events: none;
+}
+
+.search-results.active {
+  display: block;
+  pointer-events: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-result-item:hover {
+  background: #f9f9f9;
+}
+
+.search-result-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 12px;
+}
+
+.search-result-item strong {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.search-result-item p {
+  color: var(--accent);
+  font-size: 13px;
+  margin: 0;
+}
+
+.cta-wa {
+  background: #25d366;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.cta-wa:hover {
+  background: #20bd5a;
 }
 
 /* Smooth Scroll for the whole page */
@@ -222,6 +358,13 @@ footer div:first-child h3 {
   header {
     padding: 10px 5%;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Hide search bar on mobile */
+  .search-bar {
+    display: none;
   }
 
   /* 2. Hide the text links (About, Products, etc.) in the top header only */
@@ -278,6 +421,11 @@ footer div:first-child h3 {
     z-index: 9999;
   }
 
+  /* Add padding to body for bottom nav */
+  body {
+    padding-bottom: 60px;
+  }
+
   .mobile-bottom-nav a {
     display: flex;
     flex-direction: column;
@@ -290,7 +438,7 @@ footer div:first-child h3 {
   .mobile-bottom-nav i {
     font-size: 20px;
     margin-bottom: 3px;
-    color: var(--purple);
+    color: var(--accent);
   }
 
   /* Add space at the bottom of the body so content isn't hidden by the bar */
