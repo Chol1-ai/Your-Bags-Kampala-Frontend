@@ -661,26 +661,31 @@
               <tbody id="orderTableBody">
                 <!-- Orders will be loaded here -->
               </tbody>
-          </table>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="section-card">
-          <div class="section-header">
-            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+            </table>
           </div>
-          <div class="quick-actions">
-            <div class="quick-action-btn" onclick="openProductModal()">
-              <i class="fas fa-plus-circle"></i>
-              Add Product
+
+          <!-- Quick Actions -->
+          <div class="section-card">
+            <div class="section-header">
+              <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
             </div>
-            <div class="quick-action-btn" onclick="showTab('orders')">
-              <i class="fas fa-list"></i>
-              View Orders
-            </div>
-            <div class="quick-action-btn" onclick="showTab('customers')">
-              <i class="fas fa-user-plus"></i>
-              Add Customer
+            <div class="quick-actions">
+              <div class="quick-action-btn" onclick="showTab('products')">
+                <i class="fas fa-box"></i>
+                View Products
+              </div>
+              <div class="quick-action-btn" onclick="showTab('orders')">
+                <i class="fas fa-list"></i>
+                View Orders
+              </div>
+              <div class="quick-action-btn" onclick="showTab('customers')">
+                <i class="fas fa-users"></i>
+                View Customers
+              </div>
+              <div class="quick-action-btn" onclick="openProductModal()">
+                <i class="fas fa-plus-circle"></i>
+                Add Product
+              </div>
             </div>
             <div
               class="quick-action-btn"
@@ -1206,7 +1211,30 @@
 
       // Quick action function
       function showTab(tabId) {
-        alert("This section is coming soon!");
+        // Hide all sections
+        const sections = document.querySelectorAll(".section-card");
+        sections.forEach((section) => {
+          section.style.display = "none";
+        });
+
+        // Show the selected section
+        if (tabId === "products") {
+          document.querySelector(".section-card:nth-child(1)").style.display =
+            "block";
+        } else if (tabId === "customers") {
+          document.querySelector(".section-card:nth-child(2)").style.display =
+            "block";
+        } else if (tabId === "orders") {
+          document.querySelector(".section-card:nth-child(3)").style.display =
+            "block";
+        } else if (tabId === "all") {
+          sections.forEach((section) => {
+            section.style.display = "block";
+          });
+        }
+
+        // Scroll to top
+        window.scrollTo(0, 0);
       }
     </script>
   </body>
