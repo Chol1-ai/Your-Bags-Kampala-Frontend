@@ -2,7 +2,8 @@
 .hero {
   height: 100vh;
   width: 100%;
-  background: url("../images/Kampala.jpg") center/cover;
+  background: url("../images/afro-beauti-african-american-adult.jpg")
+    center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
