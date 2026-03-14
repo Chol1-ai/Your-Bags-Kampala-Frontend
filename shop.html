@@ -17,24 +17,30 @@
       rel="stylesheet"
     />
     <style>
-      /* Cart Sidebar Styles */
+      /* Cart Sidebar Styles - Centered */
       .cart-sidebar {
         position: fixed;
-        top: 0;
-        right: -400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 380px;
         max-width: 90%;
-        height: 100%;
+        max-height: 85vh;
         background: white;
-        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
         z-index: 10001;
-        transition: right 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         display: flex;
         flex-direction: column;
+        border-radius: 20px;
+        opacity: 0;
+        pointer-events: none;
       }
 
       .cart-sidebar.active {
-        right: 0;
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
       }
 
       .cart-header {
