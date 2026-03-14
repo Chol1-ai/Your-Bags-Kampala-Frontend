@@ -32,9 +32,10 @@
         transition: opacity 0.3s ease, transform 0.3s ease;
         display: flex;
         flex-direction: column;
-        border-radius: 20px;
+        border-radius: 12px;
         opacity: 0;
         pointer-events: none;
+        margin: 10px;
       }
 
       .cart-sidebar.active {
@@ -933,7 +934,7 @@
       class="modal"
       style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10002; align-items: center; justify-content: center;"
     >
-      <div class="cart-sidebar active" style="background: white; width: 90%; max-width: 450px; max-height: 90vh; overflow-y: auto; border-radius: 20px; position: relative;">
+      <div class="cart-sidebar active" style="background: white; width: 90%; max-width: 450px; max-height: 90vh; overflow-y: auto; border-radius: 12px; position: relative; box-shadow: 0 5px 25px rgba(0,0,0,0.2); margin: 10px;">
       <div class="cart-header">
         <h3>Checkout</h3>
         <button
