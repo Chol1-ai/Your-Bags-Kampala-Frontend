@@ -97,17 +97,35 @@
     <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
 
     <!-- Checkout Modal -->
-    <div id="checkoutModal" class="modal" style="display: none">
+    <div
+      id="checkoutModal"
+      class="modal"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10001;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+      "
+    >
       <div
         style="
           background: white;
-          padding: 30px;
+          padding: 25px 20px;
           border-radius: 20px;
-          width: 90%;
-          max-width: 450px;
+          width: 100%;
+          max-width: 400px;
           max-height: 90vh;
           overflow-y: auto;
           position: relative;
+          box-sizing: border-box;
         "
       >
         <button
@@ -684,13 +702,13 @@
 
       function openCheckoutForm() {
         if (cart.length === 0) return;
+        // Close cart completely
+        document.getElementById("cartSidebar").classList.remove("active");
+        document.getElementById("cartOverlay").style.display = "none";
+        
         let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
         document.getElementById("checkoutTotal").textContent =
           "UGX " + total.toLocaleString();
-        // Close cart first, then show checkout
-        document.getElementById("cartSidebar").classList.remove("active");
-        document.getElementById("cartOverlay").style.display = "none";
-        // Show checkout modal
         document.getElementById("checkoutModal").style.display = "flex";
       }
 
