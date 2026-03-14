@@ -604,17 +604,8 @@
         }
         localStorage.setItem("cart", JSON.stringify(cart));
         updateCartCount();
-        // Open checkout directly after adding item
-        openCheckoutForm();
-      }
-
-      function openCheckoutForm() {
-        if (cart.length === 0) return;
-        let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-        document.getElementById("checkoutTotal").textContent =
-          "UGX " + total.toLocaleString();
-        document.getElementById("checkoutModal").style.display = "flex";
-        document.getElementById("cartOverlay").style.display = "block";
+        openCart(); // Open cart to show item was added
+        alert(product.name + " added to cart!"); // Show confirmation
       }
 
       function openCart() {
