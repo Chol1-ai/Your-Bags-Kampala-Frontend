@@ -471,7 +471,7 @@
         />
       </div>
       <select id="sortOrder" class="sort-select" onchange="handleSort()">
-        <option value="default">Sort: Recommended</option>
+        <option value="default">Recommended</option>
         <option value="low">Price: Low to High</option>
         <option value="high">Price: High to Low</option>
       </select>
@@ -1090,7 +1090,17 @@
         }
         localStorage.setItem("cart", JSON.stringify(cart));
         updateCartCount();
-        openCart();
+        // Open checkout directly after adding item
+        openCheckoutFromShop();
+      }
+
+      function openCheckoutFromShop() {
+        if (cart.length === 0) return;
+        let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        document.getElementById("checkoutTotal").textContent =
+          "UGX " + total.toLocaleString();
+        document.getElementById("checkoutModal").classList.add("active");
+        document.getElementById("checkoutOverlay").classList.add("active");
       }
 
       function openCart() {

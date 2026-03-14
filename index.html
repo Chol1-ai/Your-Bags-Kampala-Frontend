@@ -368,7 +368,7 @@
             alt="Executive Leather Laptop Bag"
             onerror="this.src = 'images/bag-placeholder.svg'"
           />
-          <h4>Executive Leather Laptop Bag</h4>
+          <h4>Classic Everyday Handbag</h4>
           <p class="price">UGX 120,000</p>
           <a
             href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20Executive%20Leather%20Laptop%20Bag"
@@ -393,7 +393,7 @@
             alt="Waterproof Travel Duffel"
             onerror="this.src = 'images/bag-placeholder.svg'"
           />
-          <h4>Waterproof Travel Duffel</h4>
+          <h4>Daily Carry Tote</h4>
           <p class="price">UGX 85,000</p>
           <a
             href="https://wa.me/256764266189?text=Hello%20Your%20Bags%20Kampala!%20I%20want%20to%20order%20the%20Waterproof%20Travel%20Duffel"
@@ -604,7 +604,17 @@
         }
         localStorage.setItem("cart", JSON.stringify(cart));
         updateCartCount();
-        openCart();
+        // Open checkout directly after adding item
+        openCheckoutForm();
+      }
+
+      function openCheckoutForm() {
+        if (cart.length === 0) return;
+        let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        document.getElementById("checkoutTotal").textContent =
+          "UGX " + total.toLocaleString();
+        document.getElementById("checkoutModal").style.display = "flex";
+        document.getElementById("cartOverlay").style.display = "block";
       }
 
       function openCart() {
